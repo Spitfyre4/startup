@@ -10,5 +10,8 @@ Need a new website to track your workouts? Look no further, this workout builder
 * 
 ## Technologies
 ### Authentication
+Users will have their own accounts where they will be able to store their workouts, record what they did, and view other workouts on the site
 ### Database data
+Personal workouts will be stored in a database, as well as the data from what they did
 ### WebSocket data
+Everytime a user posts a workout, they will be stored in databases for anyone to access
