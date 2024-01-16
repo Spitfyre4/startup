@@ -7,7 +7,7 @@ Need a new website to track your workouts? Look no further, this workout builder
 * Keep track of each workout completed, and record what and how much you were able to do
 * Post your workouts for others
 * Access previously posted workouts and use/modify them
-* 
+  
 ## Technologies
 ### Authentication
 Users will have their own accounts where they will be able to store their workouts, record what they did, and view other workouts on the site
