@@ -17,3 +17,5 @@ Users will have their own accounts where they will be able to store their workou
 Personal workouts will be stored in a database, as well as the data from what they did. Everytime a user posts a workout, they will be stored online for anyone to access.
 ### WebSocket data
 There will be a view counter and a download counter, which shows how many people viewed a workout and how many people saved it to their own account to use
+
+![Rough Draft of Workout Builder](RoughSketch_WorkoutBuilder.jpeg)
