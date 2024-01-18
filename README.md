@@ -20,3 +20,4 @@ There will be a view counter and a download counter, which shows how many people
 
 ## Rough Draft
 ![Rough Draft of Workout Builder](RoughSketch_WorkoutBuilder.jpeg)
+Image shows a few different potential web pages
