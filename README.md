@@ -8,11 +8,12 @@ Need a new website to track your workouts? Look no further, this workout builder
 * Keep track of each workout completed, and record what you were able to do and when
 * Post your workouts for others
 * Access previously posted workouts and use/modify them
+* Counter on each workout which states how many people viewed it and how many saved it to their own account to use
   
 ## Technologies
 ### Authentication
 Users will have their own accounts where they will be able to store their workouts, record what they did, and view other workouts on the site
 ### Database data
-Personal workouts will be stored in a database, as well as the data from what they did
+Personal workouts will be stored in a database, as well as the data from what they did. Everytime a user posts a workout, they will be stored online for anyone to access.
 ### WebSocket data
-Everytime a user posts a workout, they will be stored online for anyone to access
+There will be a view counter and a download counter, which shows how many people viewed a workout and how many people saved it to their own account to use
