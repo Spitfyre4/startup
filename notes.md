@@ -4,7 +4,7 @@
     * git commit -m "info about change"
 
 ** AWS
-IP address: http://54.162.108.114/
-ssh into website: ssh -i [key pair file] ubuntu@[ip address]
+- IP address: http://54.162.108.114/
+- ssh into website: ssh -i [key pair file] ubuntu@[ip address]
 
   
