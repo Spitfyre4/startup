@@ -11,7 +11,7 @@
 ## HTML
 - Tips
   * style="font-size: 1.5em;"
-     * Use in "<p>" to change font size of text
+     * Use in "< p >" to change font size of text
   * <img src="IMAGE_URL" alt="Description of the image" width="300">
      * Uploads image and changes width
 
