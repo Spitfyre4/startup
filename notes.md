@@ -8,4 +8,11 @@
 - IP address: http://54.162.108.114/
 - ssh into website: ssh -i [key pair file] ubuntu@[ip address]
 
+## HTML
+- Tips
+  * style="font-size: 1.5em;"
+     * Use in <p> to change font size of text
+  * <img src="IMAGE_URL" alt="Description of the image" width="300">
+     * Uploads image and changes width
+
   
