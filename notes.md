@@ -14,5 +14,13 @@
      * Use in "< p >" to change font size of text
   * img src="IMAGE_URL" alt="Description of the image" width="300"
      * Uploads image and changes width, put in <>
+### CSS
+- Useful things
+   *  font-family: Arial;
+   * color: white;
+   *   background-color: gray;
+   * border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 20px;
 
   
