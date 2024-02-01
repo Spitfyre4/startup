@@ -25,19 +25,6 @@
    * border-bottom: solid white thin;
    * text-align: end;
    * border: solid black;
-   * FLy-in animation
-      - .fly-in {
-  animation: fly-from-left 1s ease-out;
-}
-
-@keyframes fly-from-left {
-  0% {
-    transform: translateX(-200%);
-  }
-  100% {
-    transform: translateX(0%);
-  }
-}
 
 
   
