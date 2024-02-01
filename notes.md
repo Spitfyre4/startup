@@ -16,11 +16,28 @@
      * Uploads image and changes width, put in <>
 ### CSS
 - Useful things
-   *  font-family: Arial;
+   * font-family: Arial;
    * color: white;
-   *   background-color: gray;
+   * background-color: gray;
    * border-radius: 15px;
-  padding: 10px;
-  margin-bottom: 20px;
+   * padding: 10px;
+   * margin-bottom: 20px;
+   * border-bottom: solid white thin;
+   * text-align: end;
+   * border: solid black;
+   * FLy-in animation
+      - .fly-in {
+  animation: fly-from-left 1s ease-out;
+}
+
+@keyframes fly-from-left {
+  0% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
 
   
