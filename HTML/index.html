@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Tell browsers not to scale the viewport automatically -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simon HTML</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <!-- Use header, main, and footer elements to give semantic structure -->
+    <header>
+      <h1>Smart Workouts</h1>
+
+      <nav>
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="user_workouts.html">My Workouts</a></li>
+          <li><a href="workout_catalog.html">Workout Catalog</a></li>
+          <li><a href="account.html">Account</a></li>
+        </menu>
+      </nav>
+
+      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+      <hr />
+    </header>
+
+    <main>
+      <h1>Welcome</h1>
+      <p>Login to start</p>
+      <form method="get" action="user_workouts.html">
+        <label for="name">Username</label>
+        <input type="text" id="name" placeholder="Username" />
+        <br>
+        <label for="password">Password</label>
+        <input type="text" id="password" placeholder="Password" />
+        <button type="submit">Login</button>
+      </form>
+    </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Info</span>
+      <br />
+      <a href="about.html">About</a>
+      <br>
+      <a href="https://github.com/Spitfyre4/startup">GitHub</a>
+
+    </footer>
+  </body>
+</html>
