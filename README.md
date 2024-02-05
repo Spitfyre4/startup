@@ -24,3 +24,10 @@ Image shows a few different potential web pages
 
 ## Deliverables
 ### HTML
+
+- **HTML pages** - I have 6 HTML pages; A home page, an about page, an account detail page, a list of personal workouts, a catalog of other workours, and a workout information page
+- **Links** - The login page will take you to your personal workouts. There are labeled links that go to all the other pages in almost all the pages, including the github link. Only the workout catalog and user workouts can take you to view a specific workout.
+- **Text** - Each of the voting choices is represented by a textual description.
+- **Images** - Home page has an image of a muscular arm
+- **DB/Login** - You can login in the home page. The user workouts and workout catalog will get their workouts from the database
+- **WebSocket** - The workout shows placeholders for the websocket data which will show live updates to the views and downloads of the workout
