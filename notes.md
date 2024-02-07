@@ -25,6 +25,8 @@
    * border-bottom: solid white thin;
    * text-align: end;
    * border: solid black;
+#### Flex
+- justify-content is very useful
 
 
   
