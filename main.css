@@ -48,6 +48,12 @@ menu .nav-item {
   font-weight: bold;
 }
 
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 footer a {
   float: right;
 }
