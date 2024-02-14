@@ -1,0 +1,18 @@
+/* .translucent-box:nth-child(1){
+    top: 40%;
+    left: 10%
+} */
+
+.background {
+    background-image: url("Dumbell&Towel.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    position: relative;
+}
+
+.margin-bottom {
+    margin-top: 5px;
+    min-height: calc(100vh - 130px);
+  }
+  
