@@ -1,0 +1,19 @@
+.container {
+    position: relative;
+}
+
+.translucent-box:nth-child(1){
+    left: 0%
+}
+
+.translucent-box:nth-child(2){
+    left: 50% 
+}
+
+.background {
+    background-image: url("Generic_Gym_Dumbells2.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    position: relative;
+}
