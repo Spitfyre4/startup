@@ -14,8 +14,21 @@
     position: relative;
 }
 
+.workout-background{
+    background-image: url("Dumbell&Protein.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    position: relative;
+}
+
 .margin-bottom {
     margin-top: 5px;
     min-height: calc(100vh - 130px);
   }
+
+  .translucent-box:nth-child(2){
+    right: 10%;
+    top: 20%;
+}
   
