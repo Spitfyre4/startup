@@ -1,10 +1,13 @@
-/* .translucent-box:nth-child(1){
-    top: 40%;
-    left: 10%
-} */
-
-.background {
+.user-background {
     background-image: url("Dumbell&Towel.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    position: relative;
+}
+
+.catalog-background {
+    background-image: url("Dumbell&Apple.jpg");
     background-size: cover;
     background-position: center;
     height: 100%;
