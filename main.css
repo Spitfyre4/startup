@@ -23,7 +23,6 @@ footer {
 menu {
   flex: 1;
   display: flex;
-  /*  overwrite Bootstrap so the menu does not wrap */
   flex-direction: row !important;
   list-style: none;
 }
@@ -55,8 +54,11 @@ menu .nav-item {
 }
 
 footer a {
-  float: right;
+  display: flex; 
+  justify-content: space-between;
+  color: white;
 }
+
 
 @media (max-height: 600px) {
   header {
