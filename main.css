@@ -73,7 +73,7 @@ footer a {
   }
 }
 
-.background {
+.index-background {
   background-image: url("Generic_Gym_Dumbells.jpg");
   background-size: cover;
   background-position: center;
@@ -81,7 +81,15 @@ footer a {
   position: relative;
 }
 
-.login-form {
+.about-background {
+  background-image: url("Generic_Gym_Barbell.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  position: relative;
+}
+
+.translucent-box {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -89,4 +97,19 @@ footer a {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+}
+
+.centered-text {
+  display: flex; 
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.bottom-middle {
+  display: flex; 
+  justify-content: baseline;
+  text-align: center;
+  /* height: 100vh; */
+  margin-top: 100px;
 }
