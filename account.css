@@ -3,11 +3,11 @@
 }
 
 .translucent-box:nth-child(1){
-    left: 0%
+    top: 40%;
 }
 
 .translucent-box:nth-child(2){
-    left: 50% 
+    top: 70% 
 }
 
 .background {
