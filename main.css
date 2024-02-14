@@ -6,6 +6,7 @@ body {
 
 header {
   flex: 0 80px;
+  color: gray
 }
 
 main {
@@ -70,4 +71,22 @@ footer a {
   main {
     flex: 1 100vh;
   }
+}
+
+.background {
+  background-image: url("Generic_Gym_Dumbells.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  position: relative;
+}
+
+.login-form {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7); 
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
 }

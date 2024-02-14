@@ -16,7 +16,7 @@
     />
   </head>
   <body class="bg-white text-dark">
-    <header class="bg-primary text-light sticky-top">
+    <header class="bg-secondary text-light sticky-top">
       <h1>Smart Workouts</h1>
 
       <nav>
@@ -31,21 +31,23 @@
       <hr />
     </header>
 
-    <main>
-      <h1>Welcome</h1>
-      <div id="arm" class="picture-box"><img width="100px" src="../Strong_arm.jpg" alt="Strong Arm" /></div>
-      <p>Login to start</p>
-      <form method="get" action="user_workouts.html">
-        <label for="name">Username</label>
+    <main class="background">
+      <h1 style="  color: whitesmoke;
+      font-weight: bold;
+      height: 500px;">Welcome</h1>
+      <!-- <div id="arm" class="picture-box"><img width="100px" src="Strong_arm.jpg" alt="Strong Arm" /></div>
+      <p>Login to start</p> -->
+      <form method="get" action="user_workouts.html" class ="login-form">
+        <label for="name">Username:</label>
         <input type="text" id="name" placeholder="Username" />
         <br>
-        <label for="password">Password</label>
+        <label for="password">Password:</label>
         <input type="text" id="password" placeholder="Password" />
         <button type="submit" class="btn btn-primary">Login</button>
       </form>
     </main>
 
-    <footer class="bg-primary text-light">
+    <footer class="bg-secondary text-light">
       <!-- <hr />
       <span class="text-reset">Info</span>
       <br /> -->
