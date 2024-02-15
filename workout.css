@@ -27,8 +27,17 @@
     min-height: calc(100vh - 130px);
   }
 
+
+.workout-margin-bottom {
+    margin-bottom: 10px;
+    min-height: calc(100vh - 300px);
+    top: 35.5%
+  }
+
   .translucent-box:nth-child(2){
-    right: 10%;
-    top: 20%;
+    left: 5%;
+    top: 85%;
+    overflow-y: auto;
+    max-height: 45vh;
 }
   
