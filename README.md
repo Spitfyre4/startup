@@ -31,3 +31,15 @@ Image shows a few different potential web pages
 - **Images** - Home page has an image of a muscular arm
 - **DB/Login** - You can login in the home page. The user workouts and workout catalog will get their workouts from the database
 - **WebSocket** - The workout shows placeholders for the websocket data which will show live updates to the views and downloads of the workout
+- **3rd Party Element** - Added Placeholder in the about page
+
+### CSS
+- **Prerequisite** - Simon CSS deployed to your production environment -> Done
+- **Prerequisite** - A link to your GitHub startup repository prominently displayed on your application's home page ->Done(scroll to bottom)
+- **Prerequisite** - Notes in your startup Git repository README.md file -> Done
+- **Header, footer, and main content body** - Used CSS and Bootstrap to design and format the headers & footers, and also made custom main bodies for all web pages
+- **Navigation elements** - The links change color on hover, the current page is in bold
+- **Responsive to window resizing** - Auto adjusts when I adjusted size to iphone and ipad dimensions through inspect element
+- **Application elements** - Used bootstrap for the buttons
+- **Application text content** - Text is within translucent boxes over the background image
+- **Application images** - I added background images to every page, and overlayed the content on top
