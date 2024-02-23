@@ -34,6 +34,9 @@
   * <script src='main.js' />
   * < div onclick='1+1' />
   * (NOT VALID) < javascript>1+1</ javascript>
+- Can do this to load fonts in CSS
+  * @ import url('https://fonts/googleapis.com/css?family=quicksnad');
+- ;
 
 
 
