@@ -14,7 +14,7 @@
      * Use in "< p >" to change font size of text
   * img src="IMAGE_URL" alt="Description of the image" width="300"
      * Uploads image and changes width, put in <>
-### CSS
+## CSS
 - Useful things
    * font-family: Arial;
    * color: white;
@@ -25,8 +25,19 @@
    * border-bottom: solid white thin;
    * text-align: end;
    * border: solid black;
-#### Flex
+### Flex
 - justify-content is very useful
+
+## Kahoot tips
+- valid way to include JavaScript in HTML
+  * <script>1+1</script>
+  * <script src='main.js' />
+  * <div onclick='1+1' />
+  * (NOT VALID) <javascript>1+1</javascript>
+
+
+
+
 
 
   
