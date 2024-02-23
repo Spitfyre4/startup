@@ -51,7 +51,33 @@
   * < ul> -> unordered list
   * < ol> -> ordered list
   * < li> -> List item; must be in an ordered list, unordered list, or a menu
-  * < dt> -> data type or description term; used in a description list<dl> to define a single term
+  * < dt> -> data type or description term; used in a description list< dl> to define a single term
+- Command that makes a script executable
+  * STUDY CONSOLE COMMANDS
+  * chmod +x deploy.sh
+- DNS Subdomain
+  * k
+  * EX: c260.cs.byu.edu
+- ASYNC functions
+- Promises
+- JavaScript
+  * Regular expressions
+    - Denoted by / (Content) /
+    - used often with match
+    - EX: v.match(/A|f/i)
+      * i makes it case-insensitive, so just looking for anything with an a or an f
+  * Object
+    - Valid JavaScript Object
+      * { n:1}
+      * Equals is not proper notation for declaring an object, it's a colon
+- < div>
+  * division element
+- DOM
+  * TextContent
+    - Sets the child text of the element
+    - 
+- HTML to create a valid hyperlink
+  * < a href = 'https://c.com'>x</a>
 - 
 
 
