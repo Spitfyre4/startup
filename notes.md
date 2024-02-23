@@ -33,7 +33,7 @@
   * <script>1+1</script>
   * <script src='main.js' />
   * < div onclick='1+1' />
-  * (NOT VALID) <javascript>1+1</javascript>
+  * (NOT VALID) < javascript>1+1</ javascript>
 
 
 
