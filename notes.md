@@ -77,7 +77,7 @@
     - Sets the child text of the element
     - 
 - HTML to create a valid hyperlink
-  * < a href = 'https://c.com'>x</a>
+  * < a href = 'ht***://c.com'>x</a>
 - 
 
 
