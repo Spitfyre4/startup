@@ -34,9 +34,25 @@
   * <script src='main.js' />
   * < div onclick='1+1' />
   * (NOT VALID) < javascript>1+1</ javascript>
-- Can do this to load fonts in CSS
+- Can use this CSS to load fonts
   * @ import url('https://fonts/googleapis.com/css?family=quicksnad');
-- ;
+- Arrow functions
+  * const f = y => y++;
+    console.log(f(3))
+  * is 4? codepen says 3 though
+- Order of the CSS Box Model, outside going in
+  * Margin, border, padding, content
+- Padding
+  * p {
+     padding: 1em;
+   }
+  * Puts space around the content of selected elements
+- HTML tags
+  * < ul> -> unordered list
+  * < ol> -> ordered list
+  * < li> -> List item; must be in an ordered list, unordered list, or a menu
+  * < dt> -> data type or description term; used in a description list<dl> to define a single term
+- 
 
 
 
