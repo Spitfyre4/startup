@@ -36,10 +36,19 @@
   * (NOT VALID) < javascript>1+1</ javascript>
 - Can use this CSS to load fonts
   * @ import url('https://fonts/googleapis.com/css?family=quicksnad');
-- Arrow functions
-  * const f = y => y++;
-    console.log(f(3))
-  * is 4? codepen says 3 though
+- Java functions
+  * Arrow functions
+    - const f = y => y++;
+      console.log(f(3))
+      * is 4? codepen says 3 though
+  * Other valid Functions
+    - function f(x) {}
+    - const f = function(x) {}
+    - const f = (x) => {}
+    - (NOT VALID) function f(x) = {}
+
+
+
 - Order of the CSS Box Model, outside going in
   * Margin, border, padding, content
 - Padding
@@ -60,11 +69,18 @@
   * DNS Record Types
     - CNAME
       * To point to another DNS Record, use the CNAME DNS record type
+      * An alias
+      * I have this hostname and i want it to alias to this hostname over here
+      * Not redirects, just aliases
     - A
       * Have some host name that you are mapping to an IP address
-      * Like having example . c o m mapped to 192.0.2.1
+      * Like having example . com mapped to 192.0.2.1
     - SOA
+      * Start of Authority
+      * Telling you how you link about your DNS records with someone else
     - TXT
+      * Just storing some txt thing on a host name so someone can
+      * Makes example . com have/return some text
   * DNS Subdomain
     - EX: c260.cs.byu.edu
     - 
@@ -94,6 +110,10 @@
     - Only supports double quotes
     - Can't be undefined
     - You are declaring the data, so you have to declare what it is
+- With < div>other< /div>
+       < div class ="header">BYU< /div>
+  How do you turn just header text BYU blue?
+  * div.header { color:blue;}
 - 
 
 
