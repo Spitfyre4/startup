@@ -55,9 +55,19 @@
 - Command that makes a script executable
   * STUDY CONSOLE COMMANDS
   * chmod +x deploy.sh
-- DNS Subdomain
-  * k
-  * EX: c260.cs.byu.edu
+- DNS
+  * 
+  * DNS Record Types
+    - CNAME
+      * To point to another DNS Record, use the CNAME DNS record type
+    - A
+      * Have some host name that you are mapping to an IP address
+      * Like having example . c o m mapped to 192.0.2.1
+    - SOA
+    - TXT
+  * DNS Subdomain
+    - EX: c260.cs.byu.edu
+    - 
 - ASYNC functions
 - Promises
 - JavaScript
@@ -78,6 +88,12 @@
     - 
 - HTML to create a valid hyperlink
   * < a href = 'ht***://c.com'>x</a>
+- JSON
+  * j
+  * EX: {"x":3}
+    - Only supports double quotes
+    - Can't be undefined
+    - You are declaring the data, so you have to declare what it is
 - 
 
 
