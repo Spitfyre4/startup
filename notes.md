@@ -32,7 +32,7 @@
 - valid way to include JavaScript in HTML
   * <script>1+1</script>
   * <script src='main.js' />
-  * <div onclick='1+1' />
+  * < div onclick='1+1' />
   * (NOT VALID) <javascript>1+1</javascript>
 
 
