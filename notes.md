@@ -15,11 +15,15 @@
   * img src="IMAGE_URL" alt="Description of the image" width="300"
      * Uploads image and changes width, put in <>
 ### HTML Structure
-Some of the common HTML structural elements include body, header, footer, main, section, aside, p, table, ol/ul, div, and span. Example of all of these below. 
+The two major purposes of HTML is to provide structure and content to your web application. Some of the common HTML structural elements include `body`, `header`, `footer`, `main`, `section`, `aside`, `p`, `table`, `ol/ul`, `div`, and `span`. An example is below. It starts with the top level content `body`. The body has three children, a `header`, `main`, and `footer`. Each of the body children then contains other structural content.
 
-It starts with the top level content body. The body has three children, a header, main, and footer. Each of the body children then contains other structural content. The header contains a paragraph with a span, and a navigation containing multiple divisions of sub-content. The main contains multiple sections that contain either an unordered list (ul) or a table. Main also contains an aside for content that does not fit the content flow of the sections. The footer has a content division with a single span.
+The `header` contains a `p`aragraph with a `span`, and a `nav`igation containing multiple `div`isions of sub-content.
 
-'''html
+The `main` contains multiple `section`s that contain either an unordered list (`ul`) or a `table`. Main also contains an `aside` for content that does not fit the content flow of the sections.
+
+The `footer` has a content division with a single span.
+
+```html
 <body>
   <p>Body</p>
   <header>
@@ -64,7 +68,7 @@ It starts with the top level content body. The body has three children, a header
     <div>Footer - <span>Span</span></div>
   </footer>
 </body>
-'''
+```
 
 ### HTML Media
 - The HTML elements that represent media include img, audio, video, svg, and canvas. The img, audio, and video elements are all simple references to an external file, but svg and canvas both contain the code to render a visual image that can even be animated.
