@@ -14,6 +14,18 @@
      * Use in "< p >" to change font size of text
   * img src="IMAGE_URL" alt="Description of the image" width="300"
      * Uploads image and changes width, put in <>
+### HTML Media
+- The HTML elements that represent media include img, audio, video, svg, and canvas. The img, audio, and video elements are all simple references to an external file, but svg and canvas both contain the code to render a visual image that can even be animated.
+- Examples(all start with an "<")
+  * img alt="mountain landscape" src="https://images.pexels.com/photos/164170/pexels-photo-164170.jpeg" />
+  * audio controls src="testAudio.mp3"></audio>
+  * video controls width="300" crossorigin="anonymous">
+   < source src= https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+   </video>
+  * svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" stroke="red" fill="red" style="border: 1px solid #000000">
+  circle cx="150" cy="100" r="50" />
+    </svg>
+    - Scalable Vector Graphics(SVG) is an extremely powerful and widely supported way to render graphics inline in your HTML. This is an example of an SVG graphic that draws a black border and a red circle
 ## CSS
 - Useful things
    * font-family: Arial;
