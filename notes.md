@@ -39,7 +39,7 @@
 - Java functions
   * Arrow functions
     - const f = y => y++;
-      console.log(f(3))
+    - console.log(f(3))
       * is 4? codepen says 3 though
   * Other valid Functions
     - function f(x) {}
@@ -85,6 +85,9 @@
     - EX: c260.cs.byu.edu
     - 
 - ASYNC functions
+  * Await
+    - Wait to put the await result there
+    - Maybe put the examples
 - Promises
 - JavaScript
   * Regular expressions
@@ -110,8 +113,9 @@
     - Only supports double quotes
     - Can't be undefined
     - You are declaring the data, so you have to declare what it is
-- With < div>other< /div>
-       < div class ="header">BYU< /div>
+- With
+  * < div>other< /div>
+  * < div class ="header">BYU< /div>
   How do you turn just header text BYU blue?
   * div.header { color:blue;}
 - 
