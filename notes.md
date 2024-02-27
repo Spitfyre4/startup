@@ -152,6 +152,32 @@ footer {
 }
 ```
 ## Java
+### JavaScript in HTML
+Example
+
+index.js
+```
+function sayHello() {
+  console.log('hello');
+}
+```
+index.html
+
+```html
+<head>
+  <script src="javascript.js"></script>
+</head>
+<body>
+  <button onclick="sayHello()">Say Hello</button>
+  <button onclick="sayGoodbye()">Say Goodbye</button>
+  <script>
+    function sayGoodbye() {
+      alert('Goodbye');
+    }
+  </script>
+</body>
+```
+
 ### Anonymous functions
 Example:
 ```
@@ -182,6 +208,34 @@ console.log(
 ```
 ### Regular Expressions
 The string class has several functions that accept regular expressions. This includes match, replace, search, and split. For a quick test to see if there is a match you can use the regular expression object's test function.
+### Arrow Functions
+Example
+```
+const a = [1, 2, 3, 4];
+
+// standard function syntax
+a.sort(function (v1, v2) {
+  return v1 - v2;
+});
+
+// arrow function syntax
+a.sort((v1, v2) => v1 - v2);
+```
+#### Return Example
+```
+() => 3;
+// RETURNS: 3
+
+() => {
+  3;
+};
+// RETURNS: undefined
+
+() => {
+  return 3;
+};
+// RETURNS: 3
+```
 
 Example:
 ```
