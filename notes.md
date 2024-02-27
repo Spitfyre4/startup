@@ -96,8 +96,7 @@ The `footer` has a content division with a single span.
    * border: solid black;
 ### Flex
 - justify-content is very useful
-- Example
-
+Example:
 ```
   * {
   font-family: sans-serif;
@@ -154,7 +153,7 @@ footer {
 ```
 ## Java
 ### Anonymous functions
-- Example
+Example:
 ```
   // Function that takes a function as a parameter
 function doMath(operation, a, b) {
@@ -181,6 +180,24 @@ console.log(
 );
 // OUTPUT: 2
 ```
+### Regular Expressions
+The string class has several functions that accept regular expressions. This includes match, replace, search, and split. For a quick test to see if there is a match you can use the regular expression object's test function.
+
+Example:
+```
+const petRegex = /(dog)|(cat)|(bird)/gim;
+const text = 'Both cats and dogs are pets, but not rocks.';
+
+text.match(petRegex);
+// RETURNS: ['cat', 'dog']
+
+text.replace(petRegex, 'animal');
+// RETURNS: Both animals and animals are pets, but not rocks.
+
+petRegex.test(text);
+// RETURNS: true
+```
+
 ## Kahoot tips
 - valid way to include JavaScript in HTML
   * <script>1+1</script>
