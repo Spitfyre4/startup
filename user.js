@@ -1,7 +1,9 @@
 class User {
   constructor(){
-  const username = document.querySelector('.username');
-  username.textContent = this.getUsername().trim();
+  const usernames = document.querySelectorAll('.username');
+  usernames.forEach(username => {
+    username.textContent = this.getUsername().trim();
+  });
   const password = document.querySelector('.password');
   password.textContent = this.getPassword().trim();
   }
@@ -26,8 +28,6 @@ function login() {
   localStorage.setItem("password", password.value);
   window.location.href = "user_workouts.html";
 }
-
-
 
 
 function changeUsername() {
