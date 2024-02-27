@@ -70,6 +70,7 @@ The `footer` has a content division with a single span.
 </body>
 ```
 
+
 ### HTML Media
 - The HTML elements that represent media include img, audio, video, svg, and canvas. The img, audio, and video elements are all simple references to an external file, but svg and canvas both contain the code to render a visual image that can even be animated.
 - Examples(all start with an "<")
@@ -95,6 +96,62 @@ The `footer` has a content division with a single span.
    * border: solid black;
 ### Flex
 - justify-content is very useful
+- Example
+
+```
+  * {
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+header {
+  flex: 0 50px;
+  font-size: 20px;
+  background: hsl(223, 57%, 38%);
+  color: white;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+main {
+  flex: 1;
+  font-size: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+div {
+  padding: 0 0.5em;
+}
+
+footer {
+  flex: 0 50px;
+  background: hsl(180, 30%, 15%);
+  color: white;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+```
 
 ## Kahoot tips
 - valid way to include JavaScript in HTML
