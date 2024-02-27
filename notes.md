@@ -337,12 +337,16 @@ petRegex.test(text);
     - Only supports double quotes
     - Can't be undefined
     - You are declaring the data, so you have to declare what it is
-- With
-  * < div>other< /div>
-  * < div class ="header">BYU< /div>
+- Turning Header blue with CSS
+  ```html
+  <div>other< /div>
+  <div class ="header">BYU< /div>
+  ```
   How do you turn just header text BYU blue?
-  * div.header { color:blue;}
-- 
+  ```
+  div.header {color:blue;}
+  ```
+
 
 
 
