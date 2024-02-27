@@ -254,10 +254,12 @@ petRegex.test(text);
 
 ## Kahoot tips
 - valid way to include JavaScript in HTML
-  * <script>1+1</script>
-  * <script src='main.js' />
-  * < div onclick='1+1' />
-  * (NOT VALID) < javascript>1+1</ javascript>
+  ```
+   <script>1+1</script>
+   <script src='main.js' />
+   < div onclick='1+1' />
+   /*(NOT VALID)*/ < javascript>1+1</ javascript>
+  ```
 - Can use this CSS to load fonts
   * @ import url('https://fonts/googleapis.com/css?family=quicksnad');
 - Java functions
