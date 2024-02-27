@@ -37,19 +37,21 @@
       <div class="translucent-box">
         <h1>Account Info</h1>
             <p>Username:</p>
+            <span class="username"></span>
             <p>Password:</p>
+            <span class="password"></span>
       </div>
       <div class="translucent-box">
         <h2>Change Info</h2>
             <form method="get" action="account.html">
                 <label for="name">Username</label>
-                <input type="text" id="name" placeholder="Username" />
-                <button type="submit" class="btn btn-secondary">Change</button>
+                <input type="text" id="username" placeholder="Username" />
+                <button type="submit" class="btn btn-secondary" onclick="changeUsername()">Change</button>
             </form>
             <form method="get" action="account.html">
                 <label for="password">Password</label>
                 <input type="text" id="password" placeholder="Password" />
-                <button type="submit" class="btn btn-secondary">Change</button>
+                <button type="submit" class="btn btn-secondary" onclick="changePassword()">Change</button>
             </form>
         </div>
     </main>
@@ -62,5 +64,6 @@
       <a href="about.html" style="display: inline-block;" >About</a>
       <a href="https://github.com/Spitfyre4/startup" style="float: right;">GitHub</a>
     </footer>
+    <script src="user.js"></script>
 </body>
 </html>

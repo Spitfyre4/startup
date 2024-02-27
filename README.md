@@ -19,7 +19,7 @@ Personal workouts will be stored in a database, as well as the data from what th
 There will be a view counter and a download counter, which shows how many people viewed a workout and how many people saved it to their own account to use
 
 ## Rough Draft
-![Rough Draft of Workout Builder](RoughSketch_WorkoutBuilder.jpeg)
+![Rough Draft of Workout Builder](/images/RoughSketch_WorkoutBuilder.jpeg)
 Image shows a few different potential web pages
 
 ## Deliverables

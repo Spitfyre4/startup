@@ -1,5 +1,5 @@
 .user-background {
-    background-image: url("Dumbell&Towel.jpg");
+    background-image: url("/images/Dumbell&Towel.jpg");
     background-size: cover;
     background-position: center;
     height: 100%;
@@ -7,7 +7,7 @@
 }
 
 .catalog-background {
-    background-image: url("Dumbell&Apple.jpg");
+    background-image: url("/images/Dumbell&Apple.jpg");
     background-size: cover;
     background-position: center;
     height: 100%;
@@ -15,7 +15,7 @@
 }
 
 .workout-background{
-    background-image: url("Dumbell&Protein.jpg");
+    background-image: url("/images/Dumbell&Protein.jpg");
     background-size: cover;
     background-position: center;
     height: 100%;

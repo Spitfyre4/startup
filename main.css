@@ -74,7 +74,7 @@ footer a {
 }
 
 .index-background {
-  background-image: url("Generic_Gym_Dumbells.jpg");
+  background-image: url("/images/Generic_Gym_Dumbells.jpg");
   background-size: cover;
   background-position: center;
   height: 100%;
@@ -82,7 +82,7 @@ footer a {
 }
 
 .about-background {
-  background-image: url("Generic_Gym_Barbell.jpg");
+  background-image: url("/images/Generic_Gym_Barbell.jpg");
   background-size: cover;
   background-position: center;
   height: 100%;
