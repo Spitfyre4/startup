@@ -152,7 +152,35 @@ footer {
   align-items: center;
 }
 ```
+## Java
+### Anonymous functions
+- Example
+```
+  // Function that takes a function as a parameter
+function doMath(operation, a, b) {
+  return operation(a, b);
+}
 
+// Anonymous function assigned to a variable
+const add = function (a, b) {
+  return a + b;
+};
+
+console.log(doMath(add, 5, 3));
+// OUTPUT: 8
+
+// Anonymous function assigned to a parameter
+console.log(
+  doMath(
+    function (a, b) {
+      return a - b;
+    },
+    5,
+    3
+  )
+);
+// OUTPUT: 2
+```
 ## Kahoot tips
 - valid way to include JavaScript in HTML
   * <script>1+1</script>
