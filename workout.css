@@ -50,4 +50,16 @@
         max-width: 175px;
     }
   }
+
+  .new_workout_button{
+    color: blue;
+    font-size: 50px;
+    text-decoration: none;
+  }
+
+  .new_workout_button:hover {
+    color: black;
+    transition: width 0.3s ease-out 0.2s;
+    font-weight: bold;
+  }
   
