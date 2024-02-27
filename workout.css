@@ -35,9 +35,19 @@
   }
 
   .translucent-box:nth-child(2){
-    left: 5%;
-    top: 85%;
+    right: 1%;
+    top: 14%;
     overflow-y: auto;
     max-height: 45vh;
 }
+
+@media (max-width: 395px) {
+    .translucent-box:nth-child(2){
+        left: 5%;
+        top: 85%;
+        overflow-y: auto;
+        max-height: 45vh;
+        max-width: 175px;
+    }
+  }
   
