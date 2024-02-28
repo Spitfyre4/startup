@@ -32,12 +32,23 @@
       <hr />
     </header>
 
-    
+
+
+
     <main class="workout-background">
-      <div class="translucent-box workout-margin-bottom">
+      <form id="workout-form" class="translucent-box margin-bottom">
         <h1>New Workout</h1>
-        <p>Workout info</p>
-      </div>
+        <label for="workout-name">Workout Name:</label>
+        <input type="text" id="workout-name" name="workout-name" required><br><br>
+
+        <div id="exercise-fields">
+            <!-- Exercise fields are added dynamically -->
+        </div>
+
+        <button type="button"  class="btn btn-primary" onclick="addExerciseField()">Add Exercise</button><br><br>
+
+        <button type="submit"  class="btn btn-primary">Create Workout</button>
+    </form>
     </main>
 
     
@@ -49,5 +60,6 @@
       <a href="https://github.com/Spitfyre4/startup" style="float: right;">GitHub</a>
     </footer>
     <script src="user.js"></script>
+    <script src="workout.js"></script>
 </body>
 </html>
