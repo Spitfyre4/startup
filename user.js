@@ -5,7 +5,9 @@ class User {
     username.textContent = this.getUsername().trim();
   });
   const password = document.querySelector('.password');
+  if (password != null) {
   password.textContent = this.getPassword().trim();
+  }
   }
 
   getUsername(){

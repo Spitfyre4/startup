@@ -39,7 +39,7 @@
       <form id="workout-form" class="translucent-box margin-bottom">
         <h1>New Workout</h1>
         <label for="workout-name">Workout Name:</label>
-        <input type="text" id="workout-name" name="workout-name" required><br><br>
+        <input type="text" id="workout-name" name="workout-name" class ="workout-name" required><br><br>
 
         <div id="exercise-fields">
             <!-- Exercise fields are added dynamically -->
@@ -47,7 +47,7 @@
 
         <button type="button"  class="btn btn-primary" onclick="addExerciseField()">Add Exercise</button><br><br>
 
-        <button type="submit"  class="btn btn-primary">Create Workout</button>
+        <button type="submit"  class="btn btn-primary" onclick="createWorkout()">Create Workout</button>
     </form>
     </main>
 
@@ -59,6 +59,7 @@
       <a href="about.html" style="display: inline-block;" >About</a>
       <a href="https://github.com/Spitfyre4/startup" style="float: right;">GitHub</a>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
     <script src="user.js"></script>
     <script src="workout.js"></script>
 </body>

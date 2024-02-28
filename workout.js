@@ -1,23 +1,41 @@
-class workout{
+// import { v4 as uuidv4 } from 'uuid';
+const { v4: uuidv4 } = require('uuid');
 
+class workout{
+    constructor(name, exercises){
+        this.name = name;
+        this.exercises = exercises;
+        this.id = uuidv4();
+    }
+}
+
+class exercise{
+    constructor(name, reps, sets){
+        this.name = name;
+        this.reps = reps;
+        this.sets = sets;
+    }
 }
 
 function addExerciseField() {
+    console.log("exercise...");
     const exerciseFields = document.getElementById('exercise-fields');
 
     const exerciseContainer = document.createElement('div');
 
-    // Exercise Name
+    // Exercise name
     const exerciseName = document.createElement('input');
     exerciseName.type = 'text';
     exerciseName.name = 'exercise-name';
+    exerciseName.classList.add('exercise-name');
     exerciseName.placeholder = 'Exercise Name';
     exerciseContainer.appendChild(exerciseName);
 
-    //Number of reps/Minutes
+    //Number of reps/minutes
     const reps = document.createElement('input');
     reps.type = 'number';
     reps.name = 'reps';
+    reps.classList.add('reps');
     reps.placeholder = '# of Reps/Minutes';
     exerciseContainer.appendChild(reps);
 
@@ -25,8 +43,71 @@ function addExerciseField() {
     const sets = document.createElement('input');
     sets.type = 'number';
     sets.name = 'sets';
+    sets.classList.add('sets');
     sets.placeholder = 'Sets';
     exerciseContainer.appendChild(sets);
 
     exerciseFields.appendChild(exerciseContainer);
+}
+
+function createWorkout(){
+    console.log("Creating workout...");
+    const workoutName = document.getElementById('workout-name').value;
+    const exercises = [];
+
+    const myWorkout = new workout(workoutName, exercises);
+
+    const exerciseList = document.querySelectorAll('.exercise-name');
+    const repsList = document.querySelectorAll('.reps');
+    const setsList = document.querySelectorAll('.sets');
+
+    for (let i = 0; i < exerciseList.length; i++) {
+        const name = exerciseList[i].value;
+        const reps = repsList[i].value;
+        const sets = setsList[i].value;
+
+        const newExercise = new exercise(name, reps, sets);
+        myWorkout.exercises.push(newExercise);
+    }
+
+    localStorage.setItem(myWorkout.id, JSON.stringify(myWorkout));
+    addWorkoutID(myWorkout.id);
+    console.log(myWorkout.name);
+    window.location.href = "workout.html";
+}
+
+function addWorkoutID(id){
+    let idList = JSON.parse(localStorage.getItem('idList')) || [];
+
+    const newId = id;
+    idList.push(newId);
+
+    localStorage.setItem('idList', JSON.stringify(idList));
+}
+
+function createWorkoutLinks() {
+    const workoutLinksContainer = document.getElementById('workout-links');
+    let idList = JSON.parse(localStorage.getItem('idList')) || [];
+    
+    idList.forEach(id => {
+        const link = document.createElement('a');
+        const workout = JSON.parse(localStorage.getItem(id));
+        link.href = `workout.html?id=${workout.id}`;
+        link.textContent = workout.name;
+        link.classList.add('workout-link');
+        workoutLinksContainer.appendChild(link);
+        workoutLinksContainer.appendChild(document.createElement('br'));
+    });
+}
+
+  window.onload = function() {
+    if (window.location.pathname === '/new_workout.html') {
+        addExerciseField();
+    }
+    else if (window.location.pathname === '/workout.html') {
+        //loadWorkout();
+    }
+    else if (window.location.pathname === '/user_workouts.html') {
+        createWorkoutLinks();
+    }
 }
