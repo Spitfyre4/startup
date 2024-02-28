@@ -24,7 +24,6 @@ function generateUniqueId() {
 }
 
 function addExerciseField() {
-    console.log("exercise...");
     const exerciseFields = document.getElementById('exercise-fields');
 
     const exerciseContainer = document.createElement('div');
@@ -57,7 +56,6 @@ function addExerciseField() {
 }
 
 function createWorkout(){
-    console.log("Creating workout...");
     const workoutName = document.getElementById('workout-name').value;
     const exercises = [];
 
@@ -79,7 +77,7 @@ function createWorkout(){
     localStorage.setItem(myWorkout.id, JSON.stringify(myWorkout));
     addWorkoutID(myWorkout.id);
     console.log(myWorkout.name);
-    window.location.href = "workout.html";
+    window.location.href = "user_workouts.html";
 }
 
 function addWorkoutID(id){
@@ -100,7 +98,9 @@ function createWorkoutLinks() {
         const workout = JSON.parse(localStorage.getItem(id));
         link.href = `workout.html?id=${workout.id}`;
         link.textContent = workout.name;
-        link.classList.add('workout-link');
+        link.classList.add('workout_link');
+        link.classList.add('btn');
+        link.classList.add('btn-secondary');
         workoutLinksContainer.appendChild(link);
         workoutLinksContainer.appendChild(document.createElement('br'));
     });

@@ -62,4 +62,18 @@
     transition: width 0.3s ease-out 0.2s;
     font-weight: bold;
   }
+
+  .workout_link{
+    text-decoration: none;
+    display: flex;
+    /* justify-content: center; */
+    color: black;
+    margin-bottom: 10px;
+  }
+
+  .workout_link:hover {
+    color: black;
+    transition: width 0.3s ease-out 0.2s;
+    font-weight: bold;
+  }
   
