@@ -1,11 +1,11 @@
-// import { v4 as uuidv4 } from 'uuid';
-const { v4: uuidv4 } = require('uuid');
+
+
 
 class workout{
     constructor(name, exercises){
         this.name = name;
         this.exercises = exercises;
-        this.id = uuidv4();
+        this.id = generateUniqueId(); //Change to uuid once we use react
     }
 }
 
@@ -15,6 +15,12 @@ class exercise{
         this.reps = reps;
         this.sets = sets;
     }
+}
+
+function generateUniqueId() {
+    const timestamp = new Date().getTime();
+    const random = Math.random().toString(36).substring(2);
+    return `${timestamp}${random}`;
 }
 
 function addExerciseField() {
