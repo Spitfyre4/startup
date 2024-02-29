@@ -43,3 +43,15 @@ Image shows a few different potential web pages
 - **Application elements** - Used bootstrap for the buttons
 - **Application text content** - Text is within translucent boxes over the background image
 - **Application images** - I added background images to every page, and overlayed the content on top
+
+### JavaScript
+- **Prerequisite** - Simon CSS deployed to your production environment -> Done
+- **Prerequisite** - A link to your GitHub startup repository prominently displayed on your application's home page -> Done(scroll to bottom)
+- **Prerequisite** - Notes in your startup Git repository README.md file -> Done
+- **Prerequisite** - At least 10 git commits spread consistently throughout the assignment period -> Done
+- **Use of JavaScript**
+***future login***
+  Added 
+20% JavaScript support for future database data.
+20% JavaScript support for future WebSocket.
+40% JavaScript support for your application's interaction logic.
