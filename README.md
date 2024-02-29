@@ -54,7 +54,7 @@ Image shows a few different potential web pages
     - When you type in your login info and press enter, it saves the information. It is then displayed at the top right, as well as in the account page
     - The user can change the username and password from the account page
   * ***Database Data***
-    - The user can creat workouts which are stored and retrieved from local storage, which will be replaced with a database earlier.
+    - The user can create workouts which are stored and retrieved from local storage, which will be replaced with a database later.
   * ***Websocket***
     - I used the setInterval function to randomly increase the views and downloads number of each workout, which is the placeholder for my websocket
   * ***Application's Interaction Logic***
