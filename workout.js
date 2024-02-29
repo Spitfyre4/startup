@@ -164,21 +164,25 @@ function loadWorkout(workoutID){
 
   window.onload = function() {
     if (window.location.pathname === '/new_workout.html') {
+        const user = new User();
         addExerciseField();
     }
     else if (window.location.pathname === '/workout.html') {
+        const user = new User();
         const url = window.location.search;
         const urlParams = new URLSearchParams(url);
         const workoutID = urlParams.get('id');
         loadWorkout(workoutID);
     }
     else if (window.location.pathname === '/user_workouts.html') {
+        const user = new User();
         let idList = JSON.parse(localStorage.getItem('idList')) || [];
         createWorkoutLinks(idList);
     }
     else if (window.location.pathname === '/workout_catalog.html'){
+        const user = new User();
 
-        // Just making a sample workout for the catalog
+        // A sample workout for the catalog
         const exercises = [];
         const workout1 = new workout("Easy Workout", exercises);
 

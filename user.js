@@ -1,7 +1,9 @@
 class User {
   constructor(){
+  console.log("making user"); //Edit this to be more like a user class
   const usernames = document.querySelectorAll('.username');
   usernames.forEach(username => {
+    console.log("setting username");
     username.textContent = this.getUsername().trim();
   });
   const password = document.querySelector('.password');
