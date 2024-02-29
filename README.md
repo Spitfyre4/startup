@@ -50,8 +50,8 @@ Image shows a few different potential web pages
 - **Prerequisite** - Notes in your startup Git repository README.md file -> Done
 - **Prerequisite** - At least 10 git commits spread consistently throughout the assignment period -> Done
 - **Use of JavaScript**
-***future login***
-  Added 
-20% JavaScript support for future database data.
-20% JavaScript support for future WebSocket.
-40% JavaScript support for your application's interaction logic.
+- ***future login***
+  * Added 
+- 20% JavaScript support for future database data.
+- 20% JavaScript support for future WebSocket.
+- 40% JavaScript support for your application's interaction logic.
