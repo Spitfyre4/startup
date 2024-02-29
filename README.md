@@ -52,6 +52,7 @@ Image shows a few different potential web pages
 - **Use of JavaScript**
   * ***login***
     - When you type in your login info and press enter, it saves the information. It is then displayed at the top right, as well as in the account page
+    - The user can change the username and password from the account page
   * ***Database Data***
     - The user can creat workouts which are stored and retrieved from local storage, which will be replaced with a database earlier.
   * ***Websocket***
