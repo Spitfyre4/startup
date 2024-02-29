@@ -51,10 +51,14 @@ Image shows a few different potential web pages
 - **Prerequisite** - At least 10 git commits spread consistently throughout the assignment period -> Done
 - **Use of JavaScript**
   * ***login***
-    - Added
+    - When you type in your login info and press enter, it saves the information. It is then displayed at the top right, as well as in the account page
   * ***Database Data***
-    - Added
+    - The user can creat workouts which are stored and retrieved from local storage, which will be replaced with a database earlier.
   * ***Websocket***
-    - Added
+    - I used the setInterval function to randomly increase the views and downloads number of each workout, which is the placeholder for my websocket
   * ***Application's Interaction Logic***
-    - Added
+    - The user can create their own custom workouts
+    - The new workout page allows the user to choose how many exercises they would like, and dynamically adds new rows
+    - The users workout page will show a button that takes the user to each workout, and the list also grows dynamically as the user adds more workouts
+    - The workout.html is populated by a workout saved to a specific ID
+    - There is a temporary workout on the workout catalog page to simulate the functionality of it
