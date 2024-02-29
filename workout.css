@@ -85,7 +85,7 @@
   }
 
   .table td {
-    border: 1px solid #000; /* You can adjust border properties as needed */
+    border: 1px solid #000;
     padding: 8px;
     text-align: center;
 }

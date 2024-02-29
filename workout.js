@@ -86,9 +86,9 @@ function addWorkoutID(id){
     localStorage.setItem('idList', JSON.stringify(idList));
 }
 
-function createWorkoutLinks() {
+function createWorkoutLinks(idList) {
     const workoutLinksContainer = document.getElementById('workout-links');
-    let idList = JSON.parse(localStorage.getItem('idList')) || [];
+    
     
     idList.forEach(id => {
         const link = document.createElement('a');
@@ -173,6 +173,27 @@ function loadWorkout(workoutID){
         loadWorkout(workoutID);
     }
     else if (window.location.pathname === '/user_workouts.html') {
-        createWorkoutLinks();
+        let idList = JSON.parse(localStorage.getItem('idList')) || [];
+        createWorkoutLinks(idList);
+    }
+    else if (window.location.pathname === '/workout_catalog.html'){
+
+        // Just making a sample workout for the catalog
+        const exercises = [];
+        const workout1 = new workout("Easy Workout", exercises);
+
+        const exercise1 = new exercise("Push-ups", 30, 3);
+        workout1.exercises.push(exercise1);
+        const exercise2 = new exercise("Sit-ups", 50, 3);
+        workout1.exercises.push(exercise2);
+        const exercise3 = new exercise("Squats", 30, 3);
+        workout1.exercises.push(exercise3);
+        const exercise4 = new exercise("Planks", 1, 3);
+        workout1.exercises.push(exercise4);
+
+        localStorage.setItem(workout1.id, JSON.stringify(workout1));
+
+        let idList = [workout1.id]
+        createWorkoutLinks(idList);
     }
 }
