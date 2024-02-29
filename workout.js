@@ -162,6 +162,21 @@ function loadWorkout(workoutID){
 
 }
 
+function populateStats(){
+    let statNum = 0;
+    let downNum = 0;
+    function increaseStats() {
+        statNum += Math.floor(Math.random() * 5);
+        downNum += Math.floor(Math.random() * 2);
+        const visitsSpan = document.getElementById('visits');
+        const downloadsSpan = document.getElementById('downloads');
+        visitsSpan.textContent = `Visits: ${statNum}`;
+        downloadsSpan.textContent = `Downloads: ${downNum}`;
+    }
+    
+    const intervalId = setInterval(increaseStats, 3000);
+}
+
   window.onload = function() {
     if (window.location.pathname === '/new_workout.html') {
         const user = new User();
@@ -173,6 +188,7 @@ function loadWorkout(workoutID){
         const urlParams = new URLSearchParams(url);
         const workoutID = urlParams.get('id');
         loadWorkout(workoutID);
+        populateStats();
     }
     else if (window.location.pathname === '/user_workouts.html') {
         const user = new User();
