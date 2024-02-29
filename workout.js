@@ -1,6 +1,3 @@
-
-
-
 class workout{
     constructor(name, exercises){
         this.name = name;
@@ -106,12 +103,74 @@ function createWorkoutLinks() {
     });
 }
 
+function loadWorkout(workoutID){
+    //Workout Name
+    const workoutData = JSON.parse(localStorage.getItem(workoutID));
+    const workoutName = document.querySelector('.workoutName');
+    workoutName.textContent = workoutData.name;
+
+    //Excercises
+    const exerciseList = workoutData.exercises;
+    const exerciseField = document.getElementById('exercises');
+
+    const table = document.createElement('table');
+    table.classList.add('table');
+
+    //headers
+    const headerRow = document.createElement('tr');
+
+    const exerciseNameHeader = document.createElement('th');
+    exerciseNameHeader.textContent = 'Exercise';
+    headerRow.appendChild(exerciseNameHeader);
+
+    const repsHeader = document.createElement('th');
+    repsHeader.textContent = 'Reps/Min';
+    headerRow.appendChild(repsHeader);
+
+    const setsHeader = document.createElement('th');
+    setsHeader.textContent = 'Sets';
+    headerRow.appendChild(setsHeader);
+
+    table.appendChild(headerRow);
+
+    for (let i = 0; i < exerciseList.length; i++) {
+        const exerciseRow = document.createElement('tr');
+        
+        // Exercise name cell
+        const exerciseNameCell = document.createElement('td');
+        const exerciseName = document.createTextNode(exerciseList[i].name);
+        exerciseNameCell.appendChild(exerciseName);
+        exerciseRow.appendChild(exerciseNameCell);
+
+        // Reps cell
+        const repsCell = document.createElement('td');
+        const reps = document.createTextNode(exerciseList[i].reps);
+        repsCell.appendChild(reps);
+        exerciseRow.appendChild(repsCell);
+
+        // Sets cell
+        const setsCell = document.createElement('td');
+        const sets = document.createTextNode(exerciseList[i].sets);
+        setsCell.appendChild(sets);
+        exerciseRow.appendChild(setsCell);
+
+        table.appendChild(exerciseRow);
+    }
+
+    exerciseField.appendChild(table);
+    exerciseField.classList.add('table-container');
+
+}
+
   window.onload = function() {
     if (window.location.pathname === '/new_workout.html') {
         addExerciseField();
     }
     else if (window.location.pathname === '/workout.html') {
-        //loadWorkout();
+        const url = window.location.search;
+        const urlParams = new URLSearchParams(url);
+        const workoutID = urlParams.get('id');
+        loadWorkout(workoutID);
     }
     else if (window.location.pathname === '/user_workouts.html') {
         createWorkoutLinks();
