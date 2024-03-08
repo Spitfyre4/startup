@@ -116,7 +116,7 @@ async function createWorkoutLinks(isUser) {
       }
     
     
-    workouts.forEach(workout => {
+    workouts.values.forEach(workout => {
         const link = document.createElement('a');
         link.href = `workout.html?id=${workout.id}`;
         link.textContent = workout.name;

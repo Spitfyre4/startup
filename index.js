@@ -29,7 +29,7 @@ apiRouter.post('/workout', (req, res) => {
   });
 
 apiRouter.post('/upload', (req, res) => {
-    catalog.push(req.body.id, req.body);
+    catalog.set(req.body.id, req.body);
     res.send(catalog);
   });
 
