@@ -111,15 +111,13 @@ async function createWorkoutLinks(isUser) {
             workouts = await response.json();
         }
     
-        // Save the scores in case we go offline in the future
-        localStorage.setItem('scores', JSON.stringify(scores));
-      } catch {
+      } catch (error){
+        console.error('Error creating workout links:', error);
       }
     
     
-    idList.forEach(id => {
+    workouts.forEach(workout => {
         const link = document.createElement('a');
-        const workout = JSON.parse(localStorage.getItem(id));
         link.href = `workout.html?id=${workout.id}`;
         link.textContent = workout.name;
         link.classList.add('workout_link');
@@ -204,7 +202,7 @@ function populateStats(){
     const intervalId = setInterval(increaseStats, 3000);
 }
 
-  window.onload = function() {
+  window.onload = async function() {
     if (window.location.pathname === '/new_workout.html') {
         const user = new User();
         addExerciseField();
@@ -238,9 +236,17 @@ function populateStats(){
         const exercise4 = new exercise("Planks", 1, 3);
         workout1.exercises.push(exercise4);
 
-        localStorage.setItem(workout1.id, JSON.stringify(workout1));
-
-        let idList = [workout1.id]
+        try {
+            const response = await fetch('/api/upload', {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(workout1)
+            });
+    
+        } catch (error) {
+            console.error('Error creating catalog:', error);
+        }
+    
         createWorkoutLinks(false);
     }
 }
