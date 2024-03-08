@@ -101,31 +101,40 @@ async function createWorkout(){
 async function createWorkoutLinks(isUser) {
     const workoutLinksContainer = document.getElementById('workout-links');
     let workouts = new Map();
+    let workoutsArray = [];
     try {
         if(isUser){
             const response = await fetch('/api/workouts');
-            workouts = await response.json();
+            console.log("isUser = true");
+            workoutsArray = await response.json();
         }
         else{
             const response = await fetch('/api/catalog');
-            workouts = await response.json();
+            console.log("isUser = false");
+            workoutsArray = await response.json();
         }
     
       } catch (error){
         console.error('Error creating workout links:', error);
       }
+
+    console.log("WorkoutsArry");
+    console.log(workoutsArray);
+      workoutsArray.forEach(([key, value]) => {
+        workouts.set(key, value);
+    });
     
-    
-    workouts.values.forEach(workout => {
+    console.log(workouts);
+    for (const [id, workout] of workouts) {
         const link = document.createElement('a');
-        link.href = `workout.html?id=${workout.id}`;
+        link.href = `workout.html?id=${id}`;
         link.textContent = workout.name;
         link.classList.add('workout_link');
         link.classList.add('btn');
         link.classList.add('btn-secondary');
         workoutLinksContainer.appendChild(link);
         workoutLinksContainer.appendChild(document.createElement('br'));
-    });
+    };
 }
 
 async function loadWorkout(workoutID){
