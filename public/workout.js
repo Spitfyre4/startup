@@ -52,7 +52,7 @@ function addExerciseField() {
     exerciseFields.appendChild(exerciseContainer);
 }
 
-function createWorkout(){
+async function createWorkout(){
     const workoutName = document.getElementById('workout-name').value;
     const exercises = [];
 
@@ -71,23 +71,50 @@ function createWorkout(){
         myWorkout.exercises.push(newExercise);
     }
 
-    localStorage.setItem(myWorkout.id, JSON.stringify(myWorkout));
-    addWorkoutID(myWorkout.id);
-    console.log(myWorkout.name);
-    window.location.href = "user_workouts.html";
+
+    try {
+        const response = await fetch('/api/workout', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(myWorkout)
+        });
+
+        if (response.ok) {
+            window.location.href = "user_workouts.html";
+        } else {
+            console.error('Failed to create workout:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error creating workout:', error);
+    }
 }
 
-function addWorkoutID(id){
-    let idList = JSON.parse(localStorage.getItem('idList')) || [];
+// function addWorkoutID(id){
+//     let idList = JSON.parse(localStorage.getItem('idList')) || [];
 
-    const newId = id;
-    idList.push(newId);
+//     const newId = id;
+//     idList.push(newId);
 
-    localStorage.setItem('idList', JSON.stringify(idList));
-}
+//     localStorage.setItem('idList', JSON.stringify(idList));
+// }
 
-function createWorkoutLinks(idList) {
+async function createWorkoutLinks(isUser) {
     const workoutLinksContainer = document.getElementById('workout-links');
+    let workouts = new Map();
+    try {
+        if(isUser){
+            const response = await fetch('/api/workouts');
+            workouts = await response.json();
+        }
+        else{
+            const response = await fetch('/api/catalog');
+            workouts = await response.json();
+        }
+    
+        // Save the scores in case we go offline in the future
+        localStorage.setItem('scores', JSON.stringify(scores));
+      } catch {
+      }
     
     
     idList.forEach(id => {
@@ -193,7 +220,7 @@ function populateStats(){
     else if (window.location.pathname === '/user_workouts.html') {
         const user = new User();
         let idList = JSON.parse(localStorage.getItem('idList')) || [];
-        createWorkoutLinks(idList);
+        createWorkoutLinks(true);
     }
     else if (window.location.pathname === '/workout_catalog.html'){
         const user = new User();
@@ -214,6 +241,6 @@ function populateStats(){
         localStorage.setItem(workout1.id, JSON.stringify(workout1));
 
         let idList = [workout1.id]
-        createWorkoutLinks(idList);
+        createWorkoutLinks(false);
     }
 }
