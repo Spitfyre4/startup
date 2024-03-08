@@ -128,9 +128,18 @@ async function createWorkoutLinks(isUser) {
     });
 }
 
-function loadWorkout(workoutID){
+async function loadWorkout(workoutID){
+    let workouts = new Map();
+    let workoutData = new workout;
+    try {
+        const response = await fetch('/api/workouts');
+        workouts = await response.json();
+        workoutData = workouts.get(workoutID);
+    
+      } catch (error){
+        console.error('Error loading workout:', error);
+      }
     //Workout Name
-    const workoutData = JSON.parse(localStorage.getItem(workoutID));
     const workoutName = document.querySelector('.workoutName');
     workoutName.textContent = workoutData.name;
 
