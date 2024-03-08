@@ -1,20 +1,38 @@
 const express = require('express');
 const app = express();
 
-// The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
-// JSON body parsing using built-in middleware
 app.use(express.json());
 
-// Serve up the front-end static content hosting
 app.use(express.static('public'));
 
-// Router for service endpoints
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-// Return the application's default page if the path is unknown
+apiRouter.get('/workouts', (_req, res) => {
+    res.send(workouts);
+  });
+
+apiRouter.get('/catalog', (_req, res) => {
+    res.send(catalog);
+  });
+
+  apiRouter.get('/idList', (_req, res) => {
+    res.send(idList);
+  });
+
+apiRouter.post('/workout', (req, res) => {
+    workouts.set(req.body.id, req.body);
+    idList.push(req.body.id);
+    res.send(workouts);
+  });
+
+apiRouter.post('/upload', (req, res) => {
+    catalog.push(req.body.id, req.body);
+    res.send(catalog);
+  });
+
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
@@ -22,3 +40,15 @@ app.use((_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+let workouts = new Map();
+let catalog = new Map();
+let idList = [];
+
+// function addWorkout(newWorkout, workouts){
+    
+// }
+
+// function updateCatalog(newWorkout, catalog){
+
+// }
