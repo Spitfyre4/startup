@@ -13,15 +13,13 @@ app.use(`/api`, apiRouter);
 apiRouter.get('/workouts', (_req, res) => {
     console.log("in workouts endpoint..");
     const workoutsArray = Array.from(workouts); 
-    console.log("res:");
-    console.log(res);
     res.json(workoutsArray);
-
   });
 
 apiRouter.get('/catalog', (_req, res) => {
     console.log("in catalog endpoint..");
-    res.send(catalog);
+    const workoutsArray = Array.from(catalog); 
+    res.json(workoutsArray);
   });
 
   apiRouter.get('/idList', (_req, res) => {
@@ -54,11 +52,3 @@ app.listen(port, () => {
 let workouts = new Map();
 let catalog = new Map();
 let idList = [];
-
-// function addWorkout(newWorkout, workouts){
-    
-// }
-
-// function updateCatalog(newWorkout, catalog){
-
-// }
