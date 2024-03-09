@@ -137,12 +137,15 @@ async function createWorkoutLinks(isUser) {
 
 async function loadWorkout(workoutID){
     let workouts = new Map();
+    let catalog = new Map();
     let workoutData = new workout;
     let workoutsArray = [];
 
     try {
         const response = await fetch('/api/workouts');
         workoutsArray = await response.json();
+        const response2 = await fetch('/api/catalog');
+        catalogArray = await response2.json();
       } catch (error){
         console.error('Error loading workout:', error);
       }
@@ -151,7 +154,16 @@ async function loadWorkout(workoutID){
         workouts.set(key, value);
     });
 
-    workoutData = workouts.get(workoutID);
+    catalogArray.forEach(([key, value]) => {
+        catalog.set(key, value);
+    });
+
+    if(workouts.has(workoutID)){
+        workoutData = workouts.get(workoutID);
+    }
+    else{
+        workoutData = catalog.get(workoutID);
+    }
 
     //Workout Name
     const workoutName = document.querySelector('.workoutName');
@@ -265,7 +277,6 @@ function populateStats(){
                 headers: {'content-type': 'application/json'},
                 body: JSON.stringify(workout1)
             });
-    
         } catch (error) {
             console.error('Error creating catalog:', error);
         }
