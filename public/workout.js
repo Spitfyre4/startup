@@ -105,12 +105,10 @@ async function createWorkoutLinks(isUser) {
     try {
         if(isUser){
             const response = await fetch('/api/workouts');
-            console.log("isUser = true");
             workoutsArray = await response.json();
         }
         else{
             const response = await fetch('/api/catalog');
-            console.log("isUser = false");
             workoutsArray = await response.json();
         }
     
@@ -140,14 +138,21 @@ async function createWorkoutLinks(isUser) {
 async function loadWorkout(workoutID){
     let workouts = new Map();
     let workoutData = new workout;
+    let workoutsArray = [];
+
     try {
         const response = await fetch('/api/workouts');
-        workouts = await response.json();
-        workoutData = workouts.get(workoutID);
-    
+        workoutsArray = await response.json();
       } catch (error){
         console.error('Error loading workout:', error);
       }
+
+    workoutsArray.forEach(([key, value]) => {
+        workouts.set(key, value);
+    });
+
+    workoutData = workouts.get(workoutID);
+
     //Workout Name
     const workoutName = document.querySelector('.workoutName');
     workoutName.textContent = workoutData.name;
