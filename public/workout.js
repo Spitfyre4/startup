@@ -237,8 +237,6 @@ function populateStats(){
     const intervalId = setInterval(increaseStats, 3000);
 }
 
-let loaded = localStorage.getItem('loaded') === 'true';
-
   window.onload = async function() {
     if (window.location.pathname === '/new_workout.html') {
         const user = new User();
@@ -261,30 +259,26 @@ let loaded = localStorage.getItem('loaded') === 'true';
         const user = new User();
 
         // A sample workout for the catalog
-        if(loaded == false){
-            const exercises = [];
-            const workout1 = new workout("Easy Workout", exercises);
+        const exercises = [];
+        const workout1 = new workout("Easy Workout", exercises);
 
-            const exercise1 = new exercise("Push-ups", 30, 3);
-            workout1.exercises.push(exercise1);
-            const exercise2 = new exercise("Sit-ups", 50, 3);
-            workout1.exercises.push(exercise2);
-            const exercise3 = new exercise("Squats", 30, 3);
-            workout1.exercises.push(exercise3);
-            const exercise4 = new exercise("Planks", 1, 3);
-            workout1.exercises.push(exercise4);
+        const exercise1 = new exercise("Push-ups", 30, 3);
+        workout1.exercises.push(exercise1);
+        const exercise2 = new exercise("Sit-ups", 50, 3);
+        workout1.exercises.push(exercise2);
+        const exercise3 = new exercise("Squats", 30, 3);
+        workout1.exercises.push(exercise3);
+        const exercise4 = new exercise("Planks", 1, 3);
+        workout1.exercises.push(exercise4);
 
-            try {
-                const response = await fetch('/api/upload', {
-                    method: 'POST',
-                    headers: {'content-type': 'application/json'},
-                    body: JSON.stringify(workout1)
-                });
-                loaded = true;
-                localStorage.setItem('loaded', 'true');
-            } catch (error) {
-                console.error('Error creating catalog:', error);
-            }
+        try {
+            const response = await fetch('/api/upload', {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(workout1)
+            });
+        } catch (error) {
+            console.error('Error creating catalog:', error);
         }
     
         createWorkoutLinks(false);
