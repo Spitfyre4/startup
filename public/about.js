@@ -15,7 +15,6 @@ function displayQuote(data) {
         const authorText = document.createTextNode(data.author);
         
         box.appendChild(lineBreak);
-        // box.appendChild(lineBreak);
         box.appendChild(quoteText);
         box.appendChild(openParen);
         box.appendChild(authorText);
