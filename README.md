@@ -63,3 +63,14 @@ Image shows a few different potential web pages
     - The users workout page will show a button that takes the user to each workout, and the list also grows dynamically as the user adds more workouts
     - The workout.html is populated by a workout saved to a specific ID
     - There is a temporary workout on the workout catalog page to simulate the functionality of it
+
+### Service
+- **Prerequisite** - Simon CSS deployed to your production environment -> Done
+- **Prerequisite** - A link to your GitHub startup repository prominently displayed on your application's home page -> Done(scroll to bottom)
+- **Prerequisite** - Notes in your startup Git repository README.md file -> Done
+- **Prerequisite** - At least 10 git commits spread consistently throughout the assignment period -> Done
+- **Node.js/Express HTTP service** - Done
+- **Static middleware for frontend** - Done
+- **Calls to third party endpoints** - About page calls a third party to show a quote
+- **Backend service endpoints** - Endpoints to post a users workout, and to post to a catalog. Endpoints to get a users workout and the workouts from the catalog. Placeholder for Login
+- **Frontend calls service endpoints** - User can make their workouts, and access them on the Workouts tab
