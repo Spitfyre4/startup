@@ -1,4 +1,5 @@
 const express = require('express');
+const DB = require('./database.js');
 const app = express();
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -39,6 +40,18 @@ apiRouter.post('/upload', (req, res) => {
     console.log("in upload endpoint..");
     catalog.set(req.body.id, req.body);
     res.send(catalog);
+  });
+
+apiRouter.post('/user', (req, res) => {
+    console.log("in user post endpoint..");
+
+    DB.addUser(req.body)
+  });
+
+apiRouter.get('/user', (_req, res) => {
+    console.log("in user get endpoint..");
+    DB.verifyUser(_req.body);
+    res.send(true);
   });
 
 app.use((_req, res) => {
