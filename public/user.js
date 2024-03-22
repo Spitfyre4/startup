@@ -68,7 +68,7 @@ async function login() {
 
   try {
     const response = await fetch('/api/user', {
-        method: 'POST',
+        method: 'GET',
         headers: {'content-type': 'application/json'},
         body: JSON.stringify(user)
     });
@@ -76,10 +76,10 @@ async function login() {
     if (response.ok) {
         window.location.href = "user_workouts.html";
     } else {
-        console.error('Failed to create user:', response.statusText);
+        console.error('Failed to verify user:', response.statusText);
     }
 } catch (error) {
-    console.error('Error creating user:', error);
+    console.error('Error logging in:', error);
 }
 
 }

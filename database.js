@@ -7,8 +7,8 @@ const db = client.db('smartWorkouts');
 const userCollection = db.collection('users')
 const workoutCollection = db.collection('workouts');
 
-await workoutCollection.createIndex({ username: 1 }, { unique: true });
-await userCollection.createIndex({ username: 1 }, { unique: true });
+workoutCollection.createIndex({ username: 1 }, { unique: true });
+userCollection.createIndex({ username: 1 }, { unique: true });
 
 
 (async function testConnection() {
@@ -28,7 +28,7 @@ async function addWorkout(username, workout){
 }
 
 async function addUser(user){
-    await userCollection.updateOne(user);
+    await userCollection.insertOne(user);
 }
 
 async function getUserWorkouts(username){
@@ -40,7 +40,12 @@ async function getUserWorkouts(username){
 }
 
 async function verifyUser(user){
+    const username = user.username;
+    const password = user.password;
 
+    const filter = { username: username, password: password };
+    const result = await collection.findOne(filter);
+    return result !== null;
 }
 
-module.exports = {addWorkout, addUser, getUserWorkouts};
+module.exports = {addWorkout, addUser, getUserWorkouts, verifyUser};
