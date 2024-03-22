@@ -44,14 +44,16 @@ apiRouter.post('/upload', (req, res) => {
 
 apiRouter.post('/user', (req, res) => {
     console.log("in user post endpoint..");
+    const user = req.body
 
-    DB.addUser(req.body)
+    DB.addUser(user)
   });
 
-apiRouter.get('/user', (_req, res) => {
-    console.log("in user get endpoint..");
-    DB.verifyUser(_req.body);
-    res.send(true);
+apiRouter.get('/user', async (_req, res) => {
+  const user = req.body;
+
+  const exists = await DB.verifyUser(user);
+  res.json({ exists: exists });
   });
 
 app.use((_req, res) => {

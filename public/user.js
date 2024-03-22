@@ -35,8 +35,9 @@ window.onload = function() {
 };
 
 async function register() {
-  const username = document.querySelector("#username");
-  const password = document.querySelector("#password");
+  console.log("in register");
+  const username = document.querySelector("#username").value;
+  const password = document.querySelector("#password").value;
   localStorage.setItem("username", username.value);
   localStorage.setItem("password", password.value);
   const user = new User(username, password);
