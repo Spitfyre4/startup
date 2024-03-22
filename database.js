@@ -44,8 +44,9 @@ async function verifyUser(user){
     const password = user.password;
 
     const filter = { username: username, password: password };
-    const result = await collection.findOne(filter);
+    const result = await userCollection.findOne(filter);
     return result !== null;
 }
 
 module.exports = {addWorkout, addUser, getUserWorkouts, verifyUser};
+

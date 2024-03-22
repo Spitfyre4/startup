@@ -49,8 +49,11 @@ apiRouter.post('/user', (req, res) => {
     DB.addUser(user)
   });
 
-apiRouter.get('/user', async (_req, res) => {
-  const user = req.body;
+apiRouter.get('/user', async (req, res) => {
+  const username = req.query.username;
+  const password = req.query.password;
+
+  const user = { username, password };
 
   const exists = await DB.verifyUser(user);
   res.json({ exists: exists });

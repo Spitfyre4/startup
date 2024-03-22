@@ -38,8 +38,6 @@ async function register() {
   console.log("in register");
   const username = document.querySelector("#username").value;
   const password = document.querySelector("#password").value;
-  localStorage.setItem("username", username.value);
-  localStorage.setItem("password", password.value);
   const user = new User(username, password);
 
   try {
@@ -50,8 +48,11 @@ async function register() {
     });
 
     if (response.ok) {
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
         window.location.href = "user_workouts.html";
     } else {
+        window.location.href = "index.html";
         console.error('Failed to create user:', response.statusText);
     }
 } catch (error) {
@@ -61,22 +62,22 @@ async function register() {
 }
 
 async function login() {
-  const username = document.querySelector("#username");
-  const password = document.querySelector("#password");
-  localStorage.setItem("username", username.value);
-  localStorage.setItem("password", password.value);
+  const username = document.querySelector("#username").value;
+  const password = document.querySelector("#password").value;
   const user = new User(username, password);
 
   try {
-    const response = await fetch('/api/user', {
+    const response = await fetch('/api/user?username=${username}&password=${password}', {
         method: 'GET',
         headers: {'content-type': 'application/json'},
-        body: JSON.stringify(user)
     });
 
     if (response.ok) {
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
         window.location.href = "user_workouts.html";
     } else {
+        window.location.href = "index.html";
         console.error('Failed to verify user:', response.statusText);
     }
 } catch (error) {
