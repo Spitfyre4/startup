@@ -80,6 +80,7 @@ async function createWorkout(){
 
     username = getUsername();
     const req = new workoutReq(username, myWorkout);
+    console.log("Adding workout " + JSON.stringify(myWorkout));
 
     try {
         const response = await fetch('/api/workout', {
@@ -115,12 +116,14 @@ async function createWorkoutLinks(isUser) {
     const workoutLinksContainer = document.getElementById('workout-links');
     let workouts = new Map();
     let workoutsArray = [];
+    const username = getUsername();
+
     try {
         if(isUser){
             const response = await fetch('/api/workouts', {
                 method: 'POST',
                 headers: {'content-type': 'application/json'},
-                body: JSON.stringify(getUsername())
+                body: JSON.stringify({ username: username })
             });
             workoutsArray = await response.json();
         }
@@ -163,12 +166,13 @@ async function loadWorkout(workoutID){
     let catalog = new Map();
     let workoutData = new workout;
     let workoutsArray = [];
+    username = getUsername();
 
     try {
         const response = await fetch('/api/workouts', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
-            body: JSON.stringify(getUsername())
+            body: JSON.stringify({ username: username })
         });
         workoutsArray = await response.json();
 

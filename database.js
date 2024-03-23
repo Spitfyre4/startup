@@ -15,9 +15,15 @@ async function initializeCatalogUser() {
         username: 'catalog123456789',
         password: 'password'
     };
-
-    if (!(verifyUser(catalog))) {
-        await workoutCollection.insertOne(catalog);
+    console.log("bouta verify to initializeCatalogUser");
+    if (!(await verifyUser(catalog))) {
+        console.log("user no existo");
+        addUser(catalog);
+        const catalogWorkout = {
+            username: catalog.username,
+            workouts: {}
+        };
+        await workoutCollection.insertOne(catalogWorkout);
     }
 }
 
@@ -32,6 +38,9 @@ async function initializeCatalogUser() {
 
 
 async function addWorkout(username, workout){
+    console.log("In addworkout DB");
+    console.log("username: " + username);
+    console.log("workout: " + JSON.stringify(workout));
     const filter = { username: username };
     const update = { $set: { [`workouts.${workout.id}`]: workout } };
 
@@ -45,6 +54,7 @@ async function addUser(user){
     if(!exists){
         console.log("Username does not exist")
         await userCollection.insertOne(user);
+        await workoutCollection.insertOne({ username: user.username, workouts: {} });
         return true;
     }
     else {
@@ -58,7 +68,7 @@ async function getUserWorkouts(username){
     const projection = { workouts: 1 };
 
     const document = await workoutCollection.findOne(filter, { projection: projection });
-    return document ? document.workouts : null;
+    return document ? document.workouts : {};
 }
 
 async function verifyUser(user){

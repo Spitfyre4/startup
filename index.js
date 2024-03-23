@@ -17,21 +17,23 @@ app.use(`/api`, apiRouter);
 //     res.json(workoutsArray);
 //   });
 
-apiRouter.post('/workouts', (req, res) => {
+apiRouter.post('/workouts', async (req, res) => {
     console.log("in workouts endpoint..");
 
-    username = req.body;
-    const workoutsArray = Array.from(DB.getUserWorkouts(username)); 
+    username = req.body.username;
+    console.log("endpoint recieved: " + username);
+    const workoutsArray = Array.from(await DB.getUserWorkouts(username)); 
+    console.log("array " + workoutsArray);
     res.json(workoutsArray);
   });
 
-apiRouter.get('/catalog', (_req, res) => {
+apiRouter.get('/catalog', async (_req, res) => {
     console.log("in catalog endpoint..");
 
     // const workoutsArray = Array.from(catalog); 
     // res.json(workoutsArray);
 
-    const workoutsArray = Array.from(DB.getUserWorkouts("catalog123456789")); 
+    const workoutsArray = Array.from(await DB.getUserWorkouts("catalog123456789")); 
     res.json(workoutsArray);
     
   });
@@ -48,7 +50,10 @@ apiRouter.post('/workout', (req, res) => {
     // idList.push(req.body.id);
     // res.send(workouts);
 
-    DB.addWorkout(req.body.username, req.body.workout);
+    console.log("username: " + req.body.username);
+    console.log("workout: " + JSON.stringify(req.body.workout));
+    const added = DB.addWorkout(req.body.username, req.body.workout);
+    res.send({added: added});
   });
 
 apiRouter.post('/upload', (req, res) => {
@@ -64,8 +69,6 @@ apiRouter.post('/user', async (req, res) => {
     console.log("in user post endpoint..");
     const user = req.body;
     console.log(user);
-
-    // DB.initializeCatalogUser();
 
     const added = await DB.addUser(user);
     console.log(" - finished DB add, back in endpoing")
@@ -92,8 +95,6 @@ apiRouter.post('/verify', async (req, res) => {
   const user = { username, password };
   console.log(" -verifying " + username);
 
-  // DB.initializeCatalogUser();
-
   const exists = await DB.verifyUser(user);
   console.log("logging exists");
   console.log(exists);
@@ -105,6 +106,7 @@ app.use((_req, res) => {
 });
 
 app.listen(port, () => {
+  DB.initializeCatalogUser();
   console.log(`Listening on port ${port}`);
 });
 

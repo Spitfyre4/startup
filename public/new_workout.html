@@ -36,7 +36,7 @@
 
 
     <main class="workout-background">
-      <form id="workout-form" action="user_workouts.html" class="translucent-box margin-bottom">
+      <div id="workout-form" action="user_workouts.html" class="translucent-box margin-bottom">
         <h1>New Workout</h1>
         <label for="workout-name">Workout Name:</label>
         <input type="text" id="workout-name" name="workout-name" class ="workout-name" required><br><br>
@@ -47,8 +47,8 @@
 
         <button type="button"  class="btn btn-primary" onclick="addExerciseField()">Add Exercise</button><br><br>
 
-        <button type="submit"  class="btn btn-primary" onclick="createWorkout()">Create Workout</button>
-    </form>
+        <button type="button"  class="btn btn-primary" onclick="createWorkout()">Create Workout</button>
+      </div>
     </main>
 
     
