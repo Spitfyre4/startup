@@ -46,8 +46,16 @@ async function register() {
         headers: {'content-type': 'application/json'},
         body: JSON.stringify(user)
     });
+
+    console.log("Received response from /api/user:", response);
+
+    const responseData = await response.json();
+    console.log("Response data:", responseData);
+
+    console.log("outside try block");
+
     console.log("outside");
-    if (response.ok) {
+    if (responseData.added) {
         localStorage.setItem("username", username);
         localStorage.setItem("password", password);
         console.log("inside");
@@ -65,39 +73,6 @@ async function register() {
 
 }
 
-// async function login() {
-//   const username = document.querySelector("#username").value;
-//   const password = document.querySelector("#password").value;
-//   const user = new User(username, password);
-
-//   try {
-//     console.log("going in login try block");
-//     const response = await fetch('/api/verify', {
-//       method: 'POST',
-//       headers: {'content-type': 'application/json'},
-//       body: JSON.stringify(user)
-//     });
-//     const responseData = await response.json();
-
-//     console.log("Received response from /api/verify:", response);
-//     console.log("outside try block");
-
-//     if (responseDa.ok) {
-//       console.log("inside respone");
-//         localStorage.setItem("username", username);
-//         localStorage.setItem("password", password);
-//         window.location.href = "user_workouts.html";
-//     } else if (response.status === 401) {
-//         window.location.href = "index.html";
-//         console.error('Failed to verify user:', response.statusText);
-//     } else {
-//         console.error('Unexpected error:', response.statusText);
-//     }
-// } catch (error) {
-//     console.error('Error logging in:', error);
-// }
-
-// }
 
 async function login() {
   const username = document.querySelector("#username").value;

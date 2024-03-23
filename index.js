@@ -60,12 +60,19 @@ apiRouter.post('/upload', (req, res) => {
     DB.addWorkout("catalog123456789", req.body.workout);
   });
 
-apiRouter.post('/user', (req, res) => {
+apiRouter.post('/user', async (req, res) => {
     console.log("in user post endpoint..");
     const user = req.body;
-    DB.initializeCatalogUser();
-    DB.addUser(user);
+    console.log(user);
+
+    // DB.initializeCatalogUser();
+
+    const added = await DB.addUser(user);
+    console.log(" - finished DB add, back in endpoing")
     res.status(200);
+    console.log("added: ");
+    console.log(added);
+    res.send({added: added});
   });
 
 // apiRouter.get('/user', async (req, res) => {

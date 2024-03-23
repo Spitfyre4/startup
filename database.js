@@ -39,7 +39,18 @@ async function addWorkout(username, workout){
 }
 
 async function addUser(user){
-    await userCollection.insertOne(user);
+    console.log(" - DB addUser");
+    console.log(user);
+    const exists = await usernameExists(user.username);
+    if(!exists){
+        console.log("Username does not exist")
+        await userCollection.insertOne(user);
+        return true;
+    }
+    else {
+        return false;
+    }
+    
 }
 
 async function getUserWorkouts(username){
@@ -59,6 +70,15 @@ async function verifyUser(user){
     const filter = { username: username, password: password };
     const result = await userCollection.findOne(filter);
     console.log("printing out result");
+    console.log(result);
+    return result !== null;
+}
+
+async function usernameExists(username) {
+    console.log("in username exists");
+    const filter = { username: username };
+    const result = await userCollection.findOne(filter);
+    console.log("result");
     console.log(result);
     return result !== null;
 }
