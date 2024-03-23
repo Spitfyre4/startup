@@ -14,6 +14,13 @@ class exercise{
     }
 }
 
+class workoutReq{
+    constructor(username, workout){
+        this.username = username;
+        this.workout = workout;
+    }
+}
+
 function generateUniqueId() {
     const timestamp = new Date().getTime();
     const random = Math.random().toString(36).substring(2);
@@ -71,12 +78,14 @@ async function createWorkout(){
         myWorkout.exercises.push(newExercise);
     }
 
+    username = getUsername();
+    const req = new workoutReq(username, myWorkout);
 
     try {
         const response = await fetch('/api/workout', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
-            body: JSON.stringify(myWorkout)
+            body: JSON.stringify(req)
         });
 
         if (response.ok) {
@@ -88,6 +97,10 @@ async function createWorkout(){
         console.error('Error creating workout:', error);
     }
 }
+
+function getUsername() {
+    return localStorage.getItem('username') ?? 'Mystery user';
+  }
 
 // function addWorkoutID(id){
 //     let idList = JSON.parse(localStorage.getItem('idList')) || [];
@@ -104,7 +117,11 @@ async function createWorkoutLinks(isUser) {
     let workoutsArray = [];
     try {
         if(isUser){
-            const response = await fetch('/api/workouts');
+            const response = await fetch('/api/workouts', {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(getUsername())
+            });
             workoutsArray = await response.json();
         }
         else{
@@ -125,7 +142,13 @@ async function createWorkoutLinks(isUser) {
     console.log(workouts);
     for (const [id, workout] of workouts) {
         const link = document.createElement('a');
-        link.href = `workout.html?id=${id}`;
+        if(isUser){
+            link.href = `workout.html?id=${id}`;
+        }
+        else{
+            link.href = `workout.html?id=${id}catalog=true`;
+            // Might need to fix catalog part
+        }
         link.textContent = workout.name;
         link.classList.add('workout_link');
         link.classList.add('btn');
@@ -142,8 +165,13 @@ async function loadWorkout(workoutID){
     let workoutsArray = [];
 
     try {
-        const response = await fetch('/api/workouts');
+        const response = await fetch('/api/workouts', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(getUsername())
+        });
         workoutsArray = await response.json();
+
         const response2 = await fetch('/api/catalog');
         catalogArray = await response2.json();
       } catch (error){
@@ -222,6 +250,104 @@ async function loadWorkout(workoutID){
 
 }
 
+function uploadButton(){
+    const urlParams = new URLSearchParams(url);
+    const div = document.querySelector('upload/download');
+    const workoutID = urlParams.get('id');
+
+    //<button type="submit" class="btn btn-primary" onclick="upload()">Upload</button>
+
+    if(urlParams.get('catalog')){
+        //Make Download button
+        downloadWorkout(workoutID);
+    }
+    else{
+        //Make Upload button
+        uploadWorkout(workoutID);
+    }
+}
+
+async function uploadWorkout(workoutID){
+    let workouts = new Map();
+    let workoutData = new workout;
+    let workoutsArray = [];
+
+    try {
+        const response = await fetch('/api/workouts', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(getUsername())
+        });
+        workoutsArray = await response.json();
+      } catch (error){
+        console.error('Error uploading workout:', error);
+      }
+
+    workoutsArray.forEach(([key, value]) => {
+        workouts.set(key, value);
+    });
+
+    if(workouts.has(workoutID)){
+        workoutData = workouts.get(workoutID);
+    }
+
+
+    try {
+        const response = await fetch('/api/upload', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(workoutData)
+        });
+        } catch (error) {
+            console.error('Error uploading:', error);
+        }
+
+    
+}
+
+async function downloadWorkout(workoutID){
+    let catalog = new Map();
+    let workoutData = new workout;
+
+    try {
+        const response = await fetch('/api/workouts', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(getUsername())
+        });
+        workoutsArray = await response.json();
+
+        const response2 = await fetch('/api/catalog');
+        catalogArray = await response2.json();
+      } catch (error){
+        console.error('Error loading workout:', error);
+      }
+
+    catalogArray.forEach(([key, value]) => {
+        catalog.set(key, value);
+    });
+
+    workoutData = catalog.get(workoutID);
+
+    const req = new workoutReq(getUsername(), workoutData);
+
+    try {
+        const response = await fetch('/api/workout', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(req)
+        });
+
+        if (response.ok) {
+            window.location.href = "user_workouts.html";
+        } else {
+            console.error('Failed to download workout:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error downloading workout:', error);
+    }
+}
+
 function populateStats(){
     let statNum = 0;
     let downNum = 0;
@@ -239,11 +365,11 @@ function populateStats(){
 
   window.onload = async function() {
     if (window.location.pathname === '/new_workout.html') {
-        const user = new User();
+        // const user = new User();
         addExerciseField();
     }
     else if (window.location.pathname === '/workout.html') {
-        const user = new User();
+        // const user = new User();
         const url = window.location.search;
         const urlParams = new URLSearchParams(url);
         const workoutID = urlParams.get('id');
@@ -251,12 +377,12 @@ function populateStats(){
         populateStats();
     }
     else if (window.location.pathname === '/user_workouts.html') {
-        const user = new User();
-        let idList = JSON.parse(localStorage.getItem('idList')) || [];
+        // const user = new User();
+        // let idList = JSON.parse(localStorage.getItem('idList')) || [];
         createWorkoutLinks(true);
     }
     else if (window.location.pathname === '/workout_catalog.html'){
-        const user = new User();
+        // const user = new User();
 
         try {
             const response2 = await fetch('/api/catalog');
@@ -266,30 +392,30 @@ function populateStats(){
           }
 
         
-        if(catalogArray.length == 0){
-            // A sample workout for the catalog
-            const exercises = [];
-            const workout1 = new workout("Easy Workout", exercises);
+        // if(catalogArray.length == 0){
+        //     // A sample workout for the catalog
+        //     const exercises = [];
+        //     const workout1 = new workout("Easy Workout", exercises);
 
-            const exercise1 = new exercise("Push-ups", 30, 3);
-            workout1.exercises.push(exercise1);
-            const exercise2 = new exercise("Sit-ups", 50, 3);
-            workout1.exercises.push(exercise2);
-            const exercise3 = new exercise("Squats", 30, 3);
-            workout1.exercises.push(exercise3);
-            const exercise4 = new exercise("Planks", 1, 3);
-            workout1.exercises.push(exercise4);
+        //     const exercise1 = new exercise("Push-ups", 30, 3);
+        //     workout1.exercises.push(exercise1);
+        //     const exercise2 = new exercise("Sit-ups", 50, 3);
+        //     workout1.exercises.push(exercise2);
+        //     const exercise3 = new exercise("Squats", 30, 3);
+        //     workout1.exercises.push(exercise3);
+        //     const exercise4 = new exercise("Planks", 1, 3);
+        //     workout1.exercises.push(exercise4);
 
-            try {
-                const response = await fetch('/api/upload', {
-                    method: 'POST',
-                    headers: {'content-type': 'application/json'},
-                    body: JSON.stringify(workout1)
-                });
-            } catch (error) {
-                console.error('Error creating catalog:', error);
-            }
-        }
+        //     try {
+        //         const response = await fetch('/api/upload', {
+        //             method: 'POST',
+        //             headers: {'content-type': 'application/json'},
+        //             body: JSON.stringify(workout1)
+        //         });
+        //     } catch (error) {
+        //         console.error('Error creating catalog:', error);
+        //     }
+        // }
     
         createWorkoutLinks(false);
     }

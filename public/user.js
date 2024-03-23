@@ -46,13 +46,17 @@ async function register() {
         headers: {'content-type': 'application/json'},
         body: JSON.stringify(user)
     });
-
+    console.log("outside");
     if (response.ok) {
         localStorage.setItem("username", username);
         localStorage.setItem("password", password);
+        console.log("inside");
         window.location.href = "user_workouts.html";
+        
     } else {
+        console.log("inside");
         window.location.href = "index.html";
+        
         console.error('Failed to create user:', response.statusText);
     }
 } catch (error) {
@@ -67,7 +71,7 @@ async function login() {
   const user = new User(username, password);
 
   try {
-    const response = await fetch('/api/user?username=${username}&password=${password}', {
+    const response = await fetch(`/api/user?username=${username}&password=${password}`, {
         method: 'GET',
         headers: {'content-type': 'application/json'},
     });
@@ -76,9 +80,11 @@ async function login() {
         localStorage.setItem("username", username);
         localStorage.setItem("password", password);
         window.location.href = "user_workouts.html";
-    } else {
+    } else if (response.status === 401) {
         window.location.href = "index.html";
         console.error('Failed to verify user:', response.statusText);
+    } else {
+        console.error('Unexpected error:', response.statusText);
     }
 } catch (error) {
     console.error('Error logging in:', error);

@@ -11,48 +11,66 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-apiRouter.get('/workouts', (_req, res) => {
+// apiRouter.get('/workouts', (_req, res) => {
+//     console.log("in workouts endpoint..");
+//     const workoutsArray = Array.from(workouts); 
+//     res.json(workoutsArray);
+//   });
+
+apiRouter.post('/workouts', (req, res) => {
     console.log("in workouts endpoint..");
-    const workoutsArray = Array.from(workouts); 
+
+    username = req.body;
+    const workoutsArray = Array.from(DB.getUserWorkouts(username)); 
     res.json(workoutsArray);
   });
 
 apiRouter.get('/catalog', (_req, res) => {
     console.log("in catalog endpoint..");
-    const workoutsArray = Array.from(catalog); 
+
+    // const workoutsArray = Array.from(catalog); 
+    // res.json(workoutsArray);
+
+    const workoutsArray = Array.from(DB.getUserWorkouts("catalog123456789")); 
     res.json(workoutsArray);
+    
   });
 
-  apiRouter.get('/idList', (_req, res) => {
+apiRouter.get('/idList', (_req, res) => {
     console.log("in idList endpoint..");
     res.send(idList);
   });
 
 apiRouter.post('/workout', (req, res) => {
     console.log("in workout endpoint..");
-    console.log(req.body);
-    workouts.set(req.body.id, req.body);
-    idList.push(req.body.id);
-    res.send(workouts);
+
+    // workouts.set(req.body.id, req.body);
+    // idList.push(req.body.id);
+    // res.send(workouts);
+
+    DB.addWorkout(req.body.username, req.body.workout);
   });
 
 apiRouter.post('/upload', (req, res) => {
     console.log("in upload endpoint..");
-    catalog.set(req.body.id, req.body);
-    res.send(catalog);
+
+    // catalog.set(req.body.id, req.body);
+    // res.send(catalog);
+
+    DB.addWorkout("catalog123456789", req.body.workout);
   });
 
 apiRouter.post('/user', (req, res) => {
     console.log("in user post endpoint..");
-    const user = req.body
+    const user = req.body;
 
-    DB.addUser(user)
+    DB.addUser(user);
   });
 
 apiRouter.get('/user', async (req, res) => {
   const username = req.query.username;
   const password = req.query.password;
-
+  console.log(username);
   const user = { username, password };
 
   const exists = await DB.verifyUser(user);
@@ -67,6 +85,6 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-let workouts = new Map();
-let catalog = new Map();
+// let workouts = new Map();
+// let catalog = new Map();
 let idList = [];

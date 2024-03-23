@@ -10,6 +10,15 @@ const workoutCollection = db.collection('workouts');
 workoutCollection.createIndex({ username: 1 }, { unique: true });
 userCollection.createIndex({ username: 1 }, { unique: true });
 
+const catalog = {
+    username: 'catalog123456789',
+    password: 'password'
+};
+
+if(verifyUser(catalog)){
+    workoutCollection.insertOne(catalog);
+}
+
 
 (async function testConnection() {
   await client.connect();
