@@ -138,8 +138,9 @@ async function createWorkoutLinks(isUser) {
 
     console.log("WorkoutsArry");
     console.log(workoutsArray);
-      workoutsArray.forEach(([key, value]) => {
-        workouts.set(key, value);
+
+    workoutsArray.forEach(workout => {
+        workouts.set(workout.id, workout);
     });
     
     console.log(workouts);

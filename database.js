@@ -68,6 +68,7 @@ async function getUserWorkouts(username){
     const projection = { workouts: 1 };
 
     const document = await workoutCollection.findOne(filter, { projection: projection });
+    console.log("Document:", document);
     return document ? document.workouts : {};
 }
 

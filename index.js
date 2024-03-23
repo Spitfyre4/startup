@@ -21,9 +21,9 @@ apiRouter.post('/workouts', async (req, res) => {
     console.log("in workouts endpoint..");
 
     username = req.body.username;
-    console.log("endpoint recieved: " + username);
-    const workoutsArray = Array.from(await DB.getUserWorkouts(username)); 
-    console.log("array " + workoutsArray);
+    const workouts = await DB.getUserWorkouts(username);
+    const workoutsArray = Object.values(JSON.parse(JSON.stringify(workouts))); 
+    console.log("array: " + JSON.stringify(workoutsArray));
     res.json(workoutsArray);
   });
 
@@ -62,7 +62,8 @@ apiRouter.post('/upload', (req, res) => {
     // catalog.set(req.body.id, req.body);
     // res.send(catalog);
 
-    DB.addWorkout("catalog123456789", req.body.workout);
+    const added = DB.addWorkout("catalog123456789", req.body.workout);
+    res.send({added: added});
   });
 
 apiRouter.post('/user', async (req, res) => {
