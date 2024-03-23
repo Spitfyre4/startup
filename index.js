@@ -63,18 +63,34 @@ apiRouter.post('/upload', (req, res) => {
 apiRouter.post('/user', (req, res) => {
     console.log("in user post endpoint..");
     const user = req.body;
-
+    DB.initializeCatalogUser();
     DB.addUser(user);
+    res.status(200);
   });
 
-apiRouter.get('/user', async (req, res) => {
-  const username = req.query.username;
-  const password = req.query.password;
-  console.log(username);
+// apiRouter.get('/user', async (req, res) => {
+//   const username = req.query.username;
+//   const password = req.query.password;
+//   console.log(username);
+//   const user = { username, password };
+
+//   const exists = await DB.verifyUser(user);
+//   res.json({ exists: exists });
+//   });
+
+apiRouter.post('/verify', async (req, res) => {
+  console.log("verify endpoint");
+  const username = req.body.username;
+  const password = req.body.password;
   const user = { username, password };
+  console.log(" -verifying " + username);
+
+  // DB.initializeCatalogUser();
 
   const exists = await DB.verifyUser(user);
-  res.json({ exists: exists });
+  console.log("logging exists");
+  console.log(exists);
+  res.send({ exists: exists });
   });
 
 app.use((_req, res) => {

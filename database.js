@@ -10,13 +10,15 @@ const workoutCollection = db.collection('workouts');
 workoutCollection.createIndex({ username: 1 }, { unique: true });
 userCollection.createIndex({ username: 1 }, { unique: true });
 
-const catalog = {
-    username: 'catalog123456789',
-    password: 'password'
-};
+async function initializeCatalogUser() {
+    const catalog = {
+        username: 'catalog123456789',
+        password: 'password'
+    };
 
-if(verifyUser(catalog)){
-    workoutCollection.insertOne(catalog);
+    if (!(verifyUser(catalog))) {
+        await workoutCollection.insertOne(catalog);
+    }
 }
 
 
@@ -49,13 +51,17 @@ async function getUserWorkouts(username){
 }
 
 async function verifyUser(user){
+    console.log("DB Verify user function");
     const username = user.username;
     const password = user.password;
+    console.log(" -verifying " + username);
 
     const filter = { username: username, password: password };
     const result = await userCollection.findOne(filter);
+    console.log("printing out result");
+    console.log(result);
     return result !== null;
 }
 
-module.exports = {addWorkout, addUser, getUserWorkouts, verifyUser};
+module.exports = {addWorkout, addUser, getUserWorkouts, verifyUser, initializeCatalogUser};
 

@@ -65,31 +65,75 @@ async function register() {
 
 }
 
+// async function login() {
+//   const username = document.querySelector("#username").value;
+//   const password = document.querySelector("#password").value;
+//   const user = new User(username, password);
+
+//   try {
+//     console.log("going in login try block");
+//     const response = await fetch('/api/verify', {
+//       method: 'POST',
+//       headers: {'content-type': 'application/json'},
+//       body: JSON.stringify(user)
+//     });
+//     const responseData = await response.json();
+
+//     console.log("Received response from /api/verify:", response);
+//     console.log("outside try block");
+
+//     if (responseDa.ok) {
+//       console.log("inside respone");
+//         localStorage.setItem("username", username);
+//         localStorage.setItem("password", password);
+//         window.location.href = "user_workouts.html";
+//     } else if (response.status === 401) {
+//         window.location.href = "index.html";
+//         console.error('Failed to verify user:', response.statusText);
+//     } else {
+//         console.error('Unexpected error:', response.statusText);
+//     }
+// } catch (error) {
+//     console.error('Error logging in:', error);
+// }
+
+// }
+
 async function login() {
   const username = document.querySelector("#username").value;
   const password = document.querySelector("#password").value;
-  const user = new User(username, password);
+  const user = { username, password };
+
 
   try {
-    const response = await fetch(`/api/user?username=${username}&password=${password}`, {
-        method: 'GET',
-        headers: {'content-type': 'application/json'},
+    console.log("going in login try block");
+
+    const response = await fetch('/api/verify', {
+      method: 'POST',
+      headers: {'content-type': 'application/json'},
+      body: JSON.stringify(user)
     });
 
-    if (response.ok) {
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);
-        window.location.href = "user_workouts.html";
-    } else if (response.status === 401) {
-        window.location.href = "index.html";
-        console.error('Failed to verify user:', response.statusText);
-    } else {
-        console.error('Unexpected error:', response.statusText);
-    }
-} catch (error) {
-    console.error('Error logging in:', error);
-}
+    console.log("Received response from /api/verify:", response);
 
+    const responseData = await response.json();
+    console.log("Response data:", responseData);
+
+    console.log("outside try block");
+
+    if (responseData.exists) {
+      console.log("User verification successful.");
+      localStorage.setItem("username", username);
+      localStorage.setItem("password", password);
+      window.location.href = "user_workouts.html";
+    } else {
+      console.log("User verification failed.");
+      window.location.href = "index.html";
+    }
+
+  } catch (error) {
+    console.error('Error logging in:', error);
+  }
 }
 
 
