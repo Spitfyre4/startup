@@ -20,7 +20,8 @@ function getUsername() {
 }
 
 function getPassword() {
-  return localStorage.getItem('password') ?? 'N/A';
+  const password = localStorage.getItem('password');
+  return password ? '*'.repeat(password.length) : 'N/A';
 }
 
 class User{
