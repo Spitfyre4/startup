@@ -256,8 +256,9 @@ function uploadButton() {
     const urlParams = new URLSearchParams(window.location.search);
     const div = document.querySelector('#uploadBtn');
     const workoutID = urlParams.get('id');
+    const isUser = urlParams.get('user') === 'true';
 
-    if (urlParams.get('user')) {
+    if (isUser) {
         // Make Upload button
         const uploadButton = document.createElement('button');
         uploadButton.type = 'button';
@@ -290,7 +291,7 @@ async function uploadWorkout(workoutID){
         const response = await fetch('/api/workouts', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
-            body: JSON.stringify(getUsername())
+            body: JSON.stringify({ username: getUsername() })
         });
         workoutsArray = await response.json();
       } catch (error){
@@ -330,10 +331,6 @@ async function downloadWorkout(workoutID){
       } catch (error){
         console.error('Error downloading workout:', error);
       }
-
-    catalogArray.forEach(([key, value]) => {
-        catalog.set(key, value);
-    });
 
     catalogArray.forEach(workout => {
         catalog.set(workout.id, workout);

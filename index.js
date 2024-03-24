@@ -33,7 +33,8 @@ apiRouter.get('/catalog', async (_req, res) => {
     // const workoutsArray = Array.from(catalog); 
     // res.json(workoutsArray);
 
-    const workoutsArray = Array.from(await DB.getUserWorkouts("catalog123456789")); 
+    const workouts = await DB.getUserWorkouts("catalog123456789"); 
+    const workoutsArray = Object.values(JSON.parse(JSON.stringify(workouts))); 
     res.json(workoutsArray);
     
   });
@@ -61,8 +62,10 @@ apiRouter.post('/upload', (req, res) => {
 
     // catalog.set(req.body.id, req.body);
     // res.send(catalog);
+    console.log("workout in upload: " + JSON.stringify(req.body));
 
-    const added = DB.addWorkout("catalog123456789", req.body.workout);
+    const added = DB.addWorkout("catalog123456789", req.body);
+    console.log("out of add, back in upload");
     res.send({added: added});
   });
 
@@ -72,7 +75,7 @@ apiRouter.post('/user', async (req, res) => {
     console.log(user);
 
     const added = await DB.addUser(user);
-    console.log(" - finished DB add, back in endpoing")
+    console.log(" - finished DB add, back in endpoint")
     res.status(200);
     console.log("added: ");
     console.log(added);
