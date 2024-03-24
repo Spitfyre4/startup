@@ -74,3 +74,15 @@ Image shows a few different potential web pages
 - **Calls to third party endpoints** - About page calls a third party to show a quote
 - **Backend service endpoints** - Endpoints to post a users workout, and to post to a catalog. Endpoints to get a users workout and the workouts from the catalog. Placeholder for Login
 - **Frontend calls service endpoints** - User can make their workouts, and access them on the Workouts tab
+
+### DB/Login
+- **Prerequisite** - Simon CSS deployed to your production environment -> Done
+- **Prerequisite** - A link to your GitHub startup repository prominently displayed on your application's home page -> Done(scroll to bottom)
+- **Prerequisite** - Notes in your startup Git repository README.md file -> Done
+- **Prerequisite** - At least 10 git commits spread consistently throughout the assignment period -> Done
+- **MongoDB Atlas database created** - done!
+- **Stores data in MongoDB** - Workouts, users, and catalog workouts are stored in MongoDB
+- **User registration** - Creates a new account in the database.
+- **Existing user** - Stores the Workouts under the user logged in, user can log in to access them
+- **Use MongoDB to store credentials** - Stores both user and their workouts. Passwords are encypted.
+- **Restricts functionality** - You cannot go past the home page until you have logged in
