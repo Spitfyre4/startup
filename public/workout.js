@@ -382,7 +382,7 @@ function populateStats(){
         const url = window.location.search;
         const urlParams = new URLSearchParams(url);
         const workoutID = urlParams.get('id');
-        const isUser = urlParams.get('user');
+        const isUser = urlParams.get('user') === 'true';
         loadWorkout(workoutID, isUser);
         uploadButton();
         populateStats();
