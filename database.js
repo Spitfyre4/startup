@@ -18,7 +18,7 @@ async function initializeCatalogUser() {
     console.log("bouta verify to initializeCatalogUser");
     if (!(await verifyUser(catalog))) {
         console.log("user no existo");
-        addUser(catalog);
+        await addUser(catalog);
         const catalogWorkout = {
             username: catalog.username,
             workouts: {}
@@ -80,8 +80,6 @@ async function verifyUser(user){
 
     const filter = { username: username, password: password };
     const result = await userCollection.findOne(filter);
-    console.log("printing out result");
-    console.log(result);
     return result !== null;
 }
 
@@ -108,12 +106,12 @@ async function changeUsername(oldUsername, newUsername) {
     }
 }
 
-async function changePassword(username, newPassword) {
+async function changePassword(username, password) {
     const filter = { username: username };
-    const update = { $set: { password: newPassword } };
+    const update = { $set: { password: password } };
 
-        await userCollection.updateOne(filter, update);
-        return true
+    await userCollection.updateOne(filter, update);
+    return true
 }
 
 module.exports = {addWorkout, addUser, getUserWorkouts, verifyUser, initializeCatalogUser, changeUsername, changePassword};

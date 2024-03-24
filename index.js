@@ -44,7 +44,7 @@ apiRouter.get('/idList', (_req, res) => {
     res.send(idList);
   });
 
-apiRouter.post('/workout', (req, res) => {
+apiRouter.post('/workout', async (req, res) => {
     console.log("in workout endpoint..");
 
     // workouts.set(req.body.id, req.body);
@@ -53,18 +53,18 @@ apiRouter.post('/workout', (req, res) => {
 
     console.log("username: " + req.body.username);
     console.log("workout: " + JSON.stringify(req.body.workout));
-    const added = DB.addWorkout(req.body.username, req.body.workout);
+    const added = await DB.addWorkout(req.body.username, req.body.workout);
     res.send({added: added});
   });
 
-apiRouter.post('/upload', (req, res) => {
+apiRouter.post('/upload', async (req, res) => {
     console.log("in upload endpoint..");
 
     // catalog.set(req.body.id, req.body);
     // res.send(catalog);
     console.log("workout in upload: " + JSON.stringify(req.body));
 
-    const added = DB.addWorkout("catalog123456789", req.body);
+    const added = await DB.addWorkout("catalog123456789", req.body);
     console.log("out of add, back in upload");
     res.send({added: added});
   });
@@ -112,8 +112,8 @@ apiRouter.post('/change-username', async (req, res) => {
 });
 
 apiRouter.post('/change-password', async (req, res) => {
-    const { username, newPassword } = req.body;
-    const changed = await DB.changePassword(username, newPassword);
+    const { username, password } = req.body;
+    const changed = await DB.changePassword(username, password);
     res.send({ changed: changed});
 });
 

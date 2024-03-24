@@ -139,7 +139,7 @@ async function changeUsername() {
 
 async function changePassword() {
   const username = localStorage.getItem("username");
-  const password = document.querySelector("#password");
+  const password = document.querySelector("#password").value;
 
   try {
     const response = await fetch('/api/change-password', {
