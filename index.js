@@ -72,7 +72,6 @@ apiRouter.post('/upload', async (req, res) => {
 apiRouter.post('/user', async (req, res) => {
     console.log("in user post endpoint..");
     const user = req.body;
-    console.log(user);
 
     const added = await DB.addUser(user);
     console.log(" - finished DB add, back in endpoint")
@@ -125,7 +124,3 @@ app.listen(port, () => {
   DB.initializeCatalogUser();
   console.log(`Listening on port ${port}`);
 });
-
-// let workouts = new Map();
-// let catalog = new Map();
-let idList = [];

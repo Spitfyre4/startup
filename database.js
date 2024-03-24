@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb');
+const bcrypt = require('bcrypt');
 const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
@@ -16,7 +17,7 @@ async function initializeCatalogUser() {
         password: 'password'
     };
     console.log("bouta verify to initializeCatalogUser");
-    if (!(await verifyUser(catalog))) {
+    if (!(await usernameExists(catalog.username))) {
         console.log("user no existo");
         await addUser(catalog);
         const catalogWorkout = {
@@ -49,11 +50,15 @@ async function addWorkout(username, workout){
 
 async function addUser(user){
     console.log(" - DB addUser");
-    console.log(user);
     const exists = await usernameExists(user.username);
     if(!exists){
         console.log("Username does not exist")
-        await userCollection.insertOne(user);
+        const passwordHash = await bcrypt.hash(user.password, 10);
+        const newUser = {
+            username: user.username,
+            password: passwordHash
+        };
+        await userCollection.insertOne(newUser);
         await workoutCollection.insertOne({ username: user.username, workouts: {} });
         return true;
     }
@@ -75,12 +80,18 @@ async function getUserWorkouts(username){
 async function verifyUser(user){
     console.log("DB Verify user function");
     const username = user.username;
-    const password = user.password;
+    const providedPassword = user.password;
     console.log(" -verifying " + username);
 
-    const filter = { username: username, password: password };
+    const filter = { username: username };
     const result = await userCollection.findOne(filter);
-    return result !== null;
+    if (result) {
+        const hashedPassword = result.password;
+        const match = await bcrypt.compare(providedPassword, hashedPassword);
+        return match;
+    } else {
+        return false;
+    }
 }
 
 async function usernameExists(username) {
