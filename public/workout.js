@@ -378,7 +378,6 @@ function populateStats(){
         addExerciseField();
     }
     else if (window.location.pathname === '/workout.html') {
-        // const user = new User();
         const url = window.location.search;
         const urlParams = new URLSearchParams(url);
         const workoutID = urlParams.get('id');
@@ -388,46 +387,10 @@ function populateStats(){
         populateStats();
     }
     else if (window.location.pathname === '/user_workouts.html') {
-        // const user = new User();
-        // let idList = JSON.parse(localStorage.getItem('idList')) || [];
         createWorkoutLinks(true);
     }
     else if (window.location.pathname === '/workout_catalog.html'){
-        // const user = new User();
 
-        // try {
-        //     const response2 = await fetch('/api/catalog');
-        //     catalogArray = await response2.json();
-        //   } catch (error){
-        //     console.error('Error loading workout:', error);
-        //   }
-
-        
-        // if(catalogArray.length == 0){
-        //     // A sample workout for the catalog
-        //     const exercises = [];
-        //     const workout1 = new workout("Easy Workout", exercises);
-
-        //     const exercise1 = new exercise("Push-ups", 30, 3);
-        //     workout1.exercises.push(exercise1);
-        //     const exercise2 = new exercise("Sit-ups", 50, 3);
-        //     workout1.exercises.push(exercise2);
-        //     const exercise3 = new exercise("Squats", 30, 3);
-        //     workout1.exercises.push(exercise3);
-        //     const exercise4 = new exercise("Planks", 1, 3);
-        //     workout1.exercises.push(exercise4);
-
-        //     try {
-        //         const response = await fetch('/api/upload', {
-        //             method: 'POST',
-        //             headers: {'content-type': 'application/json'},
-        //             body: JSON.stringify(workout1)
-        //         });
-        //     } catch (error) {
-        //         console.error('Error creating catalog:', error);
-        //     }
-        // }
-    
         createWorkoutLinks(false);
     }
 }
