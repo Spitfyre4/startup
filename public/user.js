@@ -112,14 +112,52 @@ async function login() {
 }
 
 
-function changeUsername() {
-  const username = document.querySelector("#username");
-  localStorage.setItem("username", username.value);
-  window.location.href = "account.html";
+async function changeUsername() {
+  const oldUsername = localStorage.getItem("username");
+  const newUsername = document.querySelector("#username").value;
+
+  try {
+    const response = await fetch('/api/change-username', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify({ oldUsername, newUsername })
+    });
+
+    const responseData = await response.json();
+
+    if (responseData.changed) {
+        localStorage.setItem("username", newUsername);
+        window.location.href = "account.html";
+    } else {
+        console.error('Failed to change username.');
+    }
+} catch (error) {
+    console.error('Error changing username:', error);
 }
 
-function changePassword() {
+}
+
+async function changePassword() {
+  const username = localStorage.getItem("username");
   const password = document.querySelector("#password");
-  localStorage.setItem("password", password.value);
-  window.location.href = "account.html";
+
+  try {
+    const response = await fetch('/api/change-password', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify({ username, password })
+    });
+
+    const responseData = await response.json();
+
+    if (responseData.changed) {
+        localStorage.setItem("password", password);
+        window.location.href = "account.html";
+    } else {
+        console.error('Failed to change password.');
+    }
+} catch (error) {
+    console.error('Error changing password:', error);
+}
+
 }

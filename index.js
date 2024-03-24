@@ -105,6 +105,18 @@ apiRouter.post('/verify', async (req, res) => {
   res.send({ exists: exists });
   });
 
+apiRouter.post('/change-username', async (req, res) => {
+    const { oldUsername, newUsername } = req.body;
+    const changed = await DB.changeUsername(oldUsername, newUsername);
+    res.send({ changed: changed });
+});
+
+apiRouter.post('/change-password', async (req, res) => {
+    const { username, newPassword } = req.body;
+    const changed = await DB.changePassword(username, newPassword);
+    res.send({ changed: changed});
+});
+
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });

@@ -94,5 +94,27 @@ async function usernameExists(username) {
     return result !== null;
 }
 
-module.exports = {addWorkout, addUser, getUserWorkouts, verifyUser, initializeCatalogUser};
+async function changeUsername(oldUsername, newUsername) {
+    const filter = { username: oldUsername };
+    const update = { $set: { username: newUsername } };
+
+    if(!await usernameExists(newUsername)){
+        await userCollection.updateOne(filter, update);
+        await workoutCollection.updateOne(filter, update);
+        return true
+    }
+    else{
+        return false
+    }
+}
+
+async function changePassword(username, newPassword) {
+    const filter = { username: username };
+    const update = { $set: { password: newPassword } };
+
+        await userCollection.updateOne(filter, update);
+        return true
+}
+
+module.exports = {addWorkout, addUser, getUserWorkouts, verifyUser, initializeCatalogUser, changeUsername, changePassword};
 
