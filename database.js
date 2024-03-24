@@ -118,8 +118,9 @@ async function changeUsername(oldUsername, newUsername) {
 }
 
 async function changePassword(username, password) {
+    const passwordHash = await bcrypt.hash(password, 10);
     const filter = { username: username };
-    const update = { $set: { password: password } };
+    const update = { $set: { password: passwordHash } };
 
     await userCollection.updateOne(filter, update);
     return true
