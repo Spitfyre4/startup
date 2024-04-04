@@ -372,16 +372,79 @@ function populateStats(){
     const intervalId = setInterval(increaseStats, 3000);
 }
 
+function updateViews(){
+    let statNum = 0;
+    let downNum = 0;
+    function increaseStats() {
+        statNum += Math.floor(Math.random() * 5);
+        downNum += Math.floor(Math.random() * 2);
+        const visitsSpan = document.getElementById('visits');
+        const downloadsSpan = document.getElementById('downloads');
+        visitsSpan.textContent = `Visits: ${statNum}`;
+        downloadsSpan.textContent = `Downloads: ${downNum}`;
+    }
+    
+    const intervalId = setInterval(increaseStats, 3000);
+}
+
+function updateDownloads(){
+    let statNum = 0;
+    let downNum = 0;
+    function increaseStats() {
+        statNum += Math.floor(Math.random() * 5);
+        downNum += Math.floor(Math.random() * 2);
+        const visitsSpan = document.getElementById('visits');
+        const downloadsSpan = document.getElementById('downloads');
+        visitsSpan.textContent = `Visits: ${statNum}`;
+        downloadsSpan.textContent = `Downloads: ${downNum}`;
+    }
+    
+    const intervalId = setInterval(increaseStats, 3000);
+}
+
+class Websocket{
+    socket;
+
+    configureWebSocket() {
+        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+        this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+        this.socket.onmessage = async (event) => {
+        const msg = JSON.parse(await event.data.text());
+        if (msg.type === viewEvent) {
+            updateViews();
+        } else if (msg.type === DownloadEvent) {
+            updateDownloads();
+        }
+        };
+    }
+
+    broadcastEvent(event) {
+        this.socket.send(JSON.stringify(event));
+    }
+
+}
+
   window.onload = async function() {
     if (window.location.pathname === '/new_workout.html') {
         // const user = new User();
         addExerciseField();
     }
     else if (window.location.pathname === '/workout.html') {
+        const socket = new Websocket(); 
+        socket.configureWebSocket();
+
         const url = window.location.search;
         const urlParams = new URLSearchParams(url);
         const workoutID = urlParams.get('id');
         const isUser = urlParams.get('user') === 'true';
+
+        const event = {
+            type: viewEvent,
+            data: workoutID, 
+          };
+
+        socket.broadcastEvent(event);
+
         loadWorkout(workoutID, isUser);
         uploadButton();
         populateStats();
