@@ -1,5 +1,6 @@
 const express = require('express');
 const DB = require('./database.js');
+const { peerProxy } = require('./peerProxy.js');
 const app = express();
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
