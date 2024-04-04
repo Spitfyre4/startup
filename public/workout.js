@@ -2,7 +2,16 @@ class workout{
     constructor(name, exercises){
         this.name = name;
         this.exercises = exercises;
+        this.stats = { views: 0, downloads: 0};
         this.id = generateUniqueId(); //Change to uuid once we use react
+    }
+
+    incrementDownloads(){
+        this.stats.downloads +=1;
+    }
+
+    incrementViews(){
+        this.stats.views +=1;
     }
 }
 
@@ -252,7 +261,7 @@ async function loadWorkout(workoutID, isUser){
 }
 
 
-function uploadButton(workoutID) {
+function uploadButton() {
     const urlParams = new URLSearchParams(window.location.search);
     const div = document.querySelector('#uploadBtn');
     const workoutID = urlParams.get('id');
@@ -277,13 +286,6 @@ function uploadButton(workoutID) {
         downloadButton.textContent = 'Download';
         downloadButton.onclick = function() {
             downloadWorkout(workoutID);
-
-            const event = {
-                type: DownloadEvent,
-                data: workoutID, 
-              };
-              
-            socket.broadcastEvent(event);
         };
         div.appendChild(downloadButton);                
     }
@@ -345,6 +347,14 @@ async function downloadWorkout(workoutID){
 
     workoutData = catalog.get(workoutID);
 
+    const event = {
+        type: DownloadEvent,
+        data: workoutData, 
+      };
+
+    socket.broadcastEvent(event);
+
+
     const req = new workoutReq(getUsername(), workoutData);
 
     try {
@@ -379,7 +389,7 @@ async function downloadWorkout(workoutID){
 //     const intervalId = setInterval(increaseStats, 3000);
 // }
 
-function updateViews(){
+function updateViews(workoutID){
     let statNum = 0;
     let downNum = 0;
     function increaseStats() {
@@ -394,19 +404,30 @@ function updateViews(){
     const intervalId = setInterval(increaseStats, 3000);
 }
 
-function updateDownloads(){
-    let statNum = 0;
-    let downNum = 0;
-    function increaseStats() {
-        statNum += Math.floor(Math.random() * 5);
-        downNum += Math.floor(Math.random() * 2);
-        const visitsSpan = document.getElementById('visits');
-        const downloadsSpan = document.getElementById('downloads');
-        visitsSpan.textContent = `Visits: ${statNum}`;
-        downloadsSpan.textContent = `Downloads: ${downNum}`;
+async function updateDownloads(workoutData){
+
+    workoutData.incrementDownloads();
+
+    req = {workoutID: workoutData.id, workout: workoutData}
+
+    try {
+        const response = await fetch('/api/workout', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(req)
+        });
+
+        if (response.ok) {
+        } else {
+            console.error('Failed to update workout:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error updating workout:', error);
     }
-    
-    const intervalId = setInterval(increaseStats, 3000);
+
+    const downloadsSpan = document.getElementById('downloads');
+    downloadsSpan.textContent = `Downloads: ${workoutData.stats.downloads}`;
+
 }
 
 class Websocket{
@@ -418,9 +439,9 @@ class Websocket{
         this.socket.onmessage = async (event) => {
         const msg = JSON.parse(await event.data.text());
         if (msg.type === viewEvent) {
-            updateViews();
+            updateViews(msg.data);
         } else if (msg.type === DownloadEvent) {
-            updateDownloads();
+            updateDownloads(msg.data);
         }
         };
     }
@@ -453,7 +474,7 @@ class Websocket{
         socket.broadcastEvent(event);
 
         loadWorkout(workoutID, isUser);
-        uploadButton(workoutID);
+        uploadButton();
         // populateStats();
     }
     else if (window.location.pathname === '/user_workouts.html') {
