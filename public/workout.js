@@ -252,7 +252,7 @@ async function loadWorkout(workoutID, isUser){
 }
 
 
-function uploadButton() {
+function uploadButton(workoutID) {
     const urlParams = new URLSearchParams(window.location.search);
     const div = document.querySelector('#uploadBtn');
     const workoutID = urlParams.get('id');
@@ -277,6 +277,13 @@ function uploadButton() {
         downloadButton.textContent = 'Download';
         downloadButton.onclick = function() {
             downloadWorkout(workoutID);
+
+            const event = {
+                type: DownloadEvent,
+                data: workoutID, 
+              };
+              
+            socket.broadcastEvent(event);
         };
         div.appendChild(downloadButton);                
     }
@@ -357,20 +364,20 @@ async function downloadWorkout(workoutID){
     }
 }
 
-function populateStats(){
-    let statNum = 0;
-    let downNum = 0;
-    function increaseStats() {
-        statNum += Math.floor(Math.random() * 5);
-        downNum += Math.floor(Math.random() * 2);
-        const visitsSpan = document.getElementById('visits');
-        const downloadsSpan = document.getElementById('downloads');
-        visitsSpan.textContent = `Visits: ${statNum}`;
-        downloadsSpan.textContent = `Downloads: ${downNum}`;
-    }
+// function populateStats(){
+//     let statNum = 0;
+//     let downNum = 0;
+//     function increaseStats() {
+//         statNum += Math.floor(Math.random() * 5);
+//         downNum += Math.floor(Math.random() * 2);
+//         const visitsSpan = document.getElementById('visits');
+//         const downloadsSpan = document.getElementById('downloads');
+//         visitsSpan.textContent = `Visits: ${statNum}`;
+//         downloadsSpan.textContent = `Downloads: ${downNum}`;
+//     }
     
-    const intervalId = setInterval(increaseStats, 3000);
-}
+//     const intervalId = setInterval(increaseStats, 3000);
+// }
 
 function updateViews(){
     let statNum = 0;
@@ -446,8 +453,8 @@ class Websocket{
         socket.broadcastEvent(event);
 
         loadWorkout(workoutID, isUser);
-        uploadButton();
-        populateStats();
+        uploadButton(workoutID);
+        // populateStats();
     }
     else if (window.location.pathname === '/user_workouts.html') {
         createWorkoutLinks(true);
