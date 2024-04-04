@@ -57,6 +57,15 @@ apiRouter.post('/workout', async (req, res) => {
     res.send({added: added});
   });
 
+  apiRouter.post('/update', async (req, res) => {
+    console.log("in update endpoint..");
+
+    console.log("username: " + req.body.workoutID);
+    console.log("workout: " + JSON.stringify(req.body.workout));
+    const added = await DB.updateWorkout(req.body.workoutID, req.body.workout);
+    res.send({added: added});
+  });
+
 apiRouter.post('/upload', async (req, res) => {
     console.log("in upload endpoint..");
 

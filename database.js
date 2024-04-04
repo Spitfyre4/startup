@@ -68,6 +68,15 @@ async function addUser(user){
     
 }
 
+async function updateWorkout(workoutID, workout){
+    console.log(" - DB updateWorkout");
+    const filter = { "workouts.id": workoutID };
+    const update = { $set: { "workouts.$": workout } };
+
+    await workoutCollection.updateMany(filter, update);
+    
+}
+
 async function getUserWorkouts(username){
     const filter = { username: username };
     const projection = { workouts: 1 };
@@ -126,5 +135,5 @@ async function changePassword(username, password) {
     return true
 }
 
-module.exports = {addWorkout, addUser, getUserWorkouts, verifyUser, initializeCatalogUser, changeUsername, changePassword};
+module.exports = {addWorkout, addUser, getUserWorkouts, verifyUser, initializeCatalogUser, changeUsername, changePassword, updateWorkout};
 
