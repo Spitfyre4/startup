@@ -393,7 +393,7 @@ async function downloadWorkout(workoutID){
 function updateStats(workoutData){
     const visitsSpan = document.getElementById('visits');
     const downloadsSpan = document.getElementById('downloads');
-    visitsSpan.textContent = `Visits: ${workoutData.stats.visits}`;
+    visitsSpan.textContent = `Visits: ${workoutData.stats.views}`;
     downloadsSpan.textContent = `Downloads: ${workoutData.stats.downloads}`;
 }
 
@@ -401,7 +401,7 @@ async function updateViews(workoutID){
 
     const socket = new Websocket();
     socket.configureWebSocket();
-    
+
     let catalog = new Map();
     let workoutData = new workout;
 
