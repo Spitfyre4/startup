@@ -24,6 +24,7 @@ class workoutReq{
 
 const viewEvent = 'view';
 const DownloadEvent = 'download';
+let socket = null;
 
 function generateUniqueId() {
     const timestamp = new Date().getTime();
@@ -327,8 +328,8 @@ async function uploadWorkout(workoutID){
 }
 
 async function downloadWorkout(workoutID){
-    const socket = new Websocket();
-    socket.configureWebSocket();
+    // const socket = new Websocket();
+    // socket.configureWebSocket();
 
     let catalog = new Map();
     let workoutData = new workout;
@@ -401,8 +402,8 @@ function updateStats(workoutData){
 async function updateViews(workoutID){
     console.log("in update views");
 
-    const socket = new Websocket();
-    socket.configureWebSocket();
+    // const socket = new Websocket();
+    // socket.configureWebSocket();
 
     let catalog = new Map();
     let workoutData = new workout;
@@ -515,7 +516,7 @@ class Websocket{
         addExerciseField();
     }
     else if (window.location.pathname === '/workout.html') {
-        const socket = new Websocket(); 
+        socket = new Websocket(); 
         socket.configureWebSocket();
 
         const url = window.location.search;

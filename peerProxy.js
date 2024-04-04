@@ -22,9 +22,11 @@ function peerProxy(httpServer) {
     connections.push(connection);
 
     ws.on('message', function message(data) {
+      console.log("\nWebsocket has message");
       const msg = JSON.parse(data);
       if (msg.type === viewEvent || msg.type === DownloadEvent) {
           connections.forEach(c => {
+            console.log("sending message");
               c.ws.send(data);
           });
       }
