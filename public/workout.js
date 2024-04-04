@@ -30,6 +30,9 @@ class workoutReq{
     }
 }
 
+const viewEvent = 'view';
+const DownloadEvent = 'download';
+
 function generateUniqueId() {
     const timestamp = new Date().getTime();
     const random = Math.random().toString(36).substring(2);
@@ -331,6 +334,9 @@ async function uploadWorkout(workoutID){
 }
 
 async function downloadWorkout(workoutID){
+    const socket = new Websocket();
+    socket.configureWebSocket();
+
     let catalog = new Map();
     let workoutData = new workout;
 
@@ -347,12 +353,14 @@ async function downloadWorkout(workoutID){
 
     workoutData = catalog.get(workoutID);
 
+    updateDownloads(workoutData);
     const event = {
         type: DownloadEvent,
         data: workoutData, 
       };
-
+    console.log("broadcasting download");
     socket.broadcastEvent(event);
+    console.log("back from broadcasting");
 
 
     const req = new workoutReq(getUsername(), workoutData);
@@ -365,6 +373,7 @@ async function downloadWorkout(workoutID){
         });
 
         if (response.ok) {
+            await new Promise(resolve => setTimeout(resolve, 5000));
             window.location.href = "user_workouts.html";
         } else {
             console.error('Failed to download workout:', response.statusText);
@@ -389,19 +398,56 @@ async function downloadWorkout(workoutID){
 //     const intervalId = setInterval(increaseStats, 3000);
 // }
 
-function updateViews(workoutID){
-    let statNum = 0;
-    let downNum = 0;
-    function increaseStats() {
-        statNum += Math.floor(Math.random() * 5);
-        downNum += Math.floor(Math.random() * 2);
-        const visitsSpan = document.getElementById('visits');
-        const downloadsSpan = document.getElementById('downloads');
-        visitsSpan.textContent = `Visits: ${statNum}`;
-        downloadsSpan.textContent = `Downloads: ${downNum}`;
+function updateStats(workoutData){
+    const visitsSpan = document.getElementById('visits');
+    const downloadsSpan = document.getElementById('downloads');
+    visitsSpan.textContent = `Visits: ${workoutData.stats.visits}`;
+    downloadsSpan.textContent = `Downloads: ${workoutData.stats.downloads}`;
+}
+
+async function updateViews(workoutID){
+
+    let catalog = new Map();
+    let workoutData = new workout;
+
+    try {
+        const response = await fetch('/api/catalog');
+        catalogArray = await response.json();
+      } catch (error){
+        console.error('Error downloading workout:', error);
+      }
+
+    catalogArray.forEach(workout => {
+        catalog.set(workout.id, workout);
+    });
+
+    workoutData = catalog.get(workoutID);
+
+    workoutData.incrementViews();
+
+    req = {workoutID: workoutData.id, workout: workoutData}
+
+    try {
+        const response = await fetch('/api/workout', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(req)
+        });
+
+        if (response.ok) {
+        } else {
+            console.error('Failed to update workout:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error updating workout:', error);
     }
-    
-    const intervalId = setInterval(increaseStats, 3000);
+
+    const event = {
+    type: viewEvent,
+    data: workoutData, 
+    };
+
+    socket.broadcastEvent(event);
 }
 
 async function updateDownloads(workoutData){
@@ -425,9 +471,6 @@ async function updateDownloads(workoutData){
         console.error('Error updating workout:', error);
     }
 
-    const downloadsSpan = document.getElementById('downloads');
-    downloadsSpan.textContent = `Downloads: ${workoutData.stats.downloads}`;
-
 }
 
 class Websocket{
@@ -436,13 +479,30 @@ class Websocket{
     configureWebSocket() {
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
         this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+        console.log("websocket configuring");
+
         this.socket.onmessage = async (event) => {
+        console.log("in onmessage");
         const msg = JSON.parse(await event.data.text());
-        if (msg.type === viewEvent) {
-            updateViews(msg.data);
-        } else if (msg.type === DownloadEvent) {
-            updateDownloads(msg.data);
+        if (msg.type === viewEvent || msg.type === DownloadEvent){
+            if(window.location.pathname === '/workout.html'){
+                const url = window.location.search;
+                const urlParams = new URLSearchParams(url);
+                const workoutID = urlParams.get('id');
+                if(workoutID === msg.data.id){
+                    updateStats(msg.data);
+                }
+            }
+            
         }
+
+        // if (msg.type === viewEvent ) {
+        //     updateViews(msg.data);
+        // } else if (msg.type === DownloadEvent) {
+        //     console.log("in download event");
+        //     updateDownloads(msg.data);
+        // }
         };
     }
 
@@ -466,16 +526,10 @@ class Websocket{
         const workoutID = urlParams.get('id');
         const isUser = urlParams.get('user') === 'true';
 
-        const event = {
-            type: viewEvent,
-            data: workoutID, 
-          };
 
-        socket.broadcastEvent(event);
 
         loadWorkout(workoutID, isUser);
         uploadButton();
-        // populateStats();
     }
     else if (window.location.pathname === '/user_workouts.html') {
         createWorkoutLinks(true);

@@ -26,7 +26,7 @@ function peerProxy(httpServer) {
       if (msg.type === viewEvent) {
 
       } else if (msg.type === DownloadEvent) {
-
+        
       }
     });
 
