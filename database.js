@@ -70,10 +70,10 @@ async function addUser(user){
 
 async function updateWorkout(workoutID, workout){
     console.log(" - DB updateWorkout");
-    const filter = { "workouts.id": workoutID };
-    const update = { $set: { "workouts.$": workout } };
+    const filter = { [`workouts.${workoutID}`]: { $exists: true } };
+    const update = { $set: { [`workouts.${workoutID}`]: workout } };
 
-    await workoutCollection.updateMany(filter, update);
+    await workoutCollection.updateMany(filter, update); 
     
 }
 

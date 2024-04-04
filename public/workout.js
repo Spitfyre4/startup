@@ -398,6 +398,7 @@ function updateStats(workoutData){
 }
 
 async function updateViews(workoutID){
+    console.log("in update views");
 
     const socket = new Websocket();
     socket.configureWebSocket();
@@ -423,7 +424,7 @@ async function updateViews(workoutID){
     req = {workoutID: workoutData.id, workout: workoutData}
 
     try {
-        const response = await fetch('/api/workout', {
+        const response = await fetch('/api/update', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(req)
@@ -452,7 +453,7 @@ async function updateDownloads(workoutData){
     req = {workoutID: workoutData.id, workout: workoutData}
 
     try {
-        const response = await fetch('/api/workout', {
+        const response = await fetch('/api/update', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(req)
@@ -521,7 +522,7 @@ class Websocket{
         const workoutID = urlParams.get('id');
         const isUser = urlParams.get('user') === 'true';
 
-
+        console.log("about to enter update views");
         updateViews(workoutID);
         loadWorkout(workoutID, isUser);
         uploadButton();

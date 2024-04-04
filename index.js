@@ -19,6 +19,7 @@ app.use(`/api`, apiRouter);
 //   });
 
 apiRouter.post('/workouts', async (req, res) => {
+  console.log("\n");
     console.log("in workouts endpoint..");
 
     username = req.body.username;
@@ -26,9 +27,11 @@ apiRouter.post('/workouts', async (req, res) => {
     const workoutsArray = Object.values(JSON.parse(JSON.stringify(workouts))); 
     console.log("array: " + JSON.stringify(workoutsArray));
     res.json(workoutsArray);
+    console.log("\n");
   });
 
 apiRouter.get('/catalog', async (_req, res) => {
+  console.log("\n");
     console.log("in catalog endpoint..");
 
     // const workoutsArray = Array.from(catalog); 
@@ -37,15 +40,19 @@ apiRouter.get('/catalog', async (_req, res) => {
     const workouts = await DB.getUserWorkouts("catalog123456789"); 
     const workoutsArray = Object.values(JSON.parse(JSON.stringify(workouts))); 
     res.json(workoutsArray);
+    console.log("\n");
     
   });
 
 apiRouter.get('/idList', (_req, res) => {
+  console.log("\n");
     console.log("in idList endpoint..");
     res.send(idList);
+    console.log("\n");
   });
 
 apiRouter.post('/workout', async (req, res) => {
+  console.log("\n");
     console.log("in workout endpoint..");
 
     // workouts.set(req.body.id, req.body);
@@ -56,18 +63,24 @@ apiRouter.post('/workout', async (req, res) => {
     console.log("workout: " + JSON.stringify(req.body.workout));
     const added = await DB.addWorkout(req.body.username, req.body.workout);
     res.send({added: added});
+    console.log("\n");
   });
 
   apiRouter.post('/update', async (req, res) => {
+    console.log("\n");
     console.log("in update endpoint..");
+    
+    console.log("\n");
+    console.log("New workout: " + JSON.stringify(req.body.workout));
+    console.log("\n");
 
-    console.log("username: " + req.body.workoutID);
-    console.log("workout: " + JSON.stringify(req.body.workout));
     const added = await DB.updateWorkout(req.body.workoutID, req.body.workout);
     res.send({added: added});
+    console.log("\n");
   });
 
 apiRouter.post('/upload', async (req, res) => {
+    console.log("\n");
     console.log("in upload endpoint..");
 
     // catalog.set(req.body.id, req.body);
@@ -77,9 +90,11 @@ apiRouter.post('/upload', async (req, res) => {
     const added = await DB.addWorkout("catalog123456789", req.body);
     console.log("out of add, back in upload");
     res.send({added: added});
+    console.log("\n");
   });
 
 apiRouter.post('/user', async (req, res) => {
+  console.log("\n");
     console.log("in user post endpoint..");
     const user = req.body;
 
@@ -89,6 +104,7 @@ apiRouter.post('/user', async (req, res) => {
     console.log("added: ");
     console.log(added);
     res.send({added: added});
+    console.log("\n");
   });
 
 // apiRouter.get('/user', async (req, res) => {
@@ -102,6 +118,7 @@ apiRouter.post('/user', async (req, res) => {
 //   });
 
 apiRouter.post('/verify', async (req, res) => {
+  console.log("\n");
   console.log("verify endpoint");
   const username = req.body.username;
   const password = req.body.password;
@@ -112,6 +129,7 @@ apiRouter.post('/verify', async (req, res) => {
   console.log("logging exists");
   console.log(exists);
   res.send({ exists: exists });
+  console.log("\n");
   });
 
 apiRouter.post('/change-username', async (req, res) => {
