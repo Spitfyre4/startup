@@ -108,7 +108,7 @@ secureApiRouter.use(async (req, res, next) => {
   }
 });
 
-apiRouter.post('/workouts', async (req, res) => {
+secureApiRouter.post('/workouts', async (req, res) => {
   console.log("\n");
     console.log("in workouts endpoint..");
 
@@ -124,7 +124,7 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-apiRouter.get('/catalog', async (_req, res) => {
+secureApiRouter.get('/catalog', async (_req, res) => {
   console.log("\n");
     console.log("in catalog endpoint..");
 
@@ -138,7 +138,7 @@ apiRouter.get('/catalog', async (_req, res) => {
     
   });
 
-apiRouter.post('/workout', async (req, res) => {
+secureApiRouter.post('/workout', async (req, res) => {
   console.log("\n");
     console.log("in workout endpoint..");
 
@@ -153,7 +153,7 @@ apiRouter.post('/workout', async (req, res) => {
     console.log("\n");
   });
 
-apiRouter.post('/update', async (req, res) => {
+secureApiRouter.post('/update', async (req, res) => {
   console.log("\n");
   console.log("in update endpoint..");
 

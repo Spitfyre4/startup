@@ -71,6 +71,10 @@ async function addUser(user){
     
 }
 
+function getUserByToken(token) {
+    return userCollection.findOne({ token: token });
+  }
+
 async function updateWorkout(workoutID, workout){
     console.log(" - DB updateWorkout");
     const filter = { [`workouts.${workoutID}`]: { $exists: true } };
@@ -138,5 +142,5 @@ async function changePassword(username, password) {
     return true
 }
 
-module.exports = {addWorkout, addUser, getUserWorkouts, verifyUser, initializeCatalogUser, changeUsername, changePassword, updateWorkout};
+module.exports = {addWorkout, addUser, getUserWorkouts, verifyUser, initializeCatalogUser, changeUsername, changePassword, updateWorkout, getUserByToken};
 
