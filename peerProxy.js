@@ -14,19 +14,22 @@ function peerProxy(httpServer) {
 
   // Keep track of all the connections so we can forward messages
   let connections = [];
+  const viewEvent = 'view';
+  const DownloadEvent = 'download';
 
   wss.on('connection', (ws) => {
     const connection = { id: uuid.v4(), alive: true, ws: ws };
     connections.push(connection);
 
-    // Forward messages to everyone except the sender
     ws.on('message', function message(data) {
-      connections.forEach((c) => {
-        if (c.id !== connection.id) {
-          c.ws.send(data);
-        }
-      });
+      const msg = JSON.parse(data);
+      if (msg.type === viewEvent) {
+
+      } else if (msg.type === DownloadEvent) {
+
+      }
     });
+
 
     // Remove the closed connection so we don't try to forward anymore
     ws.on('close', () => {
