@@ -86,3 +86,13 @@ Image shows a few different potential web pages
 - **Existing user** - Stores the Workouts under the user logged in, user can log in to access them
 - **Use MongoDB to store credentials** - Stores both user and their workouts. Passwords are encypted.
 - **Restricts functionality** - You cannot go past the home page until you have logged in
+
+### Websocket
+- **Prerequisite** - Simon CSS deployed to your production environment -> Done
+- **Prerequisite** - A link to your GitHub startup repository prominently displayed on your application's home page -> Done(scroll to bottom)
+- **Prerequisite** - Notes in your startup Git repository README.md file -> Done
+- **Prerequisite** - At least 10 git commits spread consistently throughout the assignment period -> Done
+- **Backend listens for WebSocket connection** - Done
+- **Frontend makes WebSocket connection** - Done
+- **Data sent over WebSocket connection** - Done
+- **WebSocket data displayed** - The number of downloads is tracked and updated through websockets. You can download workouts from the workout catalog
