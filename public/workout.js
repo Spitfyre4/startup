@@ -252,6 +252,7 @@ async function loadWorkout(workoutID, isUser){
 
     exerciseField.appendChild(table);
     exerciseField.classList.add('table-container');
+    updateStats(workoutData);
 
 }
 
@@ -523,7 +524,10 @@ class Websocket{
         const isUser = urlParams.get('user') === 'true';
 
         console.log("about to enter update views");
-        updateViews(workoutID);
+        if(!isUser){
+            updateViews(workoutID);
+        }
+        
         loadWorkout(workoutID, isUser);
         uploadButton();
     }
