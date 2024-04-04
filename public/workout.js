@@ -367,7 +367,6 @@ async function downloadWorkout(workoutID){
         });
 
         if (response.ok) {
-            await new Promise(resolve => setTimeout(resolve, 5000));
             window.location.href = "user_workouts.html";
         } else {
             console.error('Failed to download workout:', response.statusText);
@@ -393,60 +392,60 @@ async function downloadWorkout(workoutID){
 // }
 
 function updateStats(workoutData){
-    const visitsSpan = document.getElementById('visits');
+    // const visitsSpan = document.getElementById('visits');
     const downloadsSpan = document.getElementById('downloads');
-    visitsSpan.textContent = `Visits: ${workoutData.stats.views}`;
+    // visitsSpan.textContent = `Visits: ${workoutData.stats.views}`;
     downloadsSpan.textContent = `Downloads: ${workoutData.stats.downloads}`;
 }
 
-async function updateViews(workoutID){
-    console.log("in update views");
+// async function updateViews(workoutID){
+//     console.log("in update views");
 
-    // const socket = new Websocket();
-    // socket.configureWebSocket();
+//     // const socket = new Websocket();
+//     // socket.configureWebSocket();
 
-    let catalog = new Map();
-    let workoutData = new workout;
+//     let catalog = new Map();
+//     let workoutData = new workout;
 
-    try {
-        const response = await fetch('/api/catalog');
-        catalogArray = await response.json();
-      } catch (error){
-        console.error('Error downloading workout:', error);
-      }
+//     try {
+//         const response = await fetch('/api/catalog');
+//         catalogArray = await response.json();
+//       } catch (error){
+//         console.error('Error downloading workout:', error);
+//       }
 
-    catalogArray.forEach(workout => {
-        catalog.set(workout.id, workout);
-    });
+//     catalogArray.forEach(workout => {
+//         catalog.set(workout.id, workout);
+//     });
 
-    workoutData = catalog.get(workoutID);
+//     workoutData = catalog.get(workoutID);
 
-    workoutData.stats.views += 1;
+//     workoutData.stats.views += 1;
 
-    req = {workoutID: workoutData.id, workout: workoutData}
+//     req = {workoutID: workoutData.id, workout: workoutData}
 
-    try {
-        const response = await fetch('/api/update', {
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            body: JSON.stringify(req)
-        });
+//     try {
+//         const response = await fetch('/api/update', {
+//             method: 'POST',
+//             headers: {'content-type': 'application/json'},
+//             body: JSON.stringify(req)
+//         });
 
-        if (response.ok) {
-        } else {
-            console.error('Failed to update workout:', response.statusText);
-        }
-    } catch (error) {
-        console.error('Error updating workout:', error);
-    }
+//         if (response.ok) {
+//         } else {
+//             console.error('Failed to update workout:', response.statusText);
+//         }
+//     } catch (error) {
+//         console.error('Error updating workout:', error);
+//     }
 
-    const event = {
-    type: viewEvent,
-    data: workoutData, 
-    };
+//     const event = {
+//     type: viewEvent,
+//     data: workoutData, 
+//     };
 
-    socket.broadcastEvent(event);
-}
+//     socket.broadcastEvent(event);
+// }
 
 async function updateDownloads(workoutData){
 
@@ -525,9 +524,9 @@ class Websocket{
         const isUser = urlParams.get('user') === 'true';
 
         console.log("about to enter update views");
-        if(!isUser){
-            updateViews(workoutID);
-        }
+        // if(!isUser){
+        //     updateViews(workoutID);
+        // }
         
         loadWorkout(workoutID, isUser);
         uploadButton();
