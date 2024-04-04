@@ -1,5 +1,6 @@
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
+const uuid = require('uuid');
 const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
@@ -22,7 +23,8 @@ async function initializeCatalogUser() {
         await addUser(catalog);
         const catalogWorkout = {
             username: catalog.username,
-            workouts: {}
+            workouts: {},
+            token: uuid.v4(),
         };
         await workoutCollection.insertOne(catalogWorkout);
     }
@@ -56,7 +58,8 @@ async function addUser(user){
         const passwordHash = await bcrypt.hash(user.password, 10);
         const newUser = {
             username: user.username,
-            password: passwordHash
+            password: passwordHash,
+            token: uuid.v4(),
         };
         await userCollection.insertOne(newUser);
         await workoutCollection.insertOne({ username: user.username, workouts: {} });
