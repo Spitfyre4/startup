@@ -5,14 +5,6 @@ class workout{
         this.stats = { views: 0, downloads: 0};
         this.id = generateUniqueId(); //Change to uuid once we use react
     }
-
-    incrementDownloads(){
-        this.stats.downloads +=1;
-    }
-
-    incrementViews(){
-        this.stats.views +=1;
-    }
 }
 
 class exercise{
@@ -407,6 +399,9 @@ function updateStats(workoutData){
 
 async function updateViews(workoutID){
 
+    const socket = new Websocket();
+    socket.configureWebSocket();
+    
     let catalog = new Map();
     let workoutData = new workout;
 
@@ -423,7 +418,7 @@ async function updateViews(workoutID){
 
     workoutData = catalog.get(workoutID);
 
-    workoutData.incrementViews();
+    workoutData.stats.views += 1;
 
     req = {workoutID: workoutData.id, workout: workoutData}
 
@@ -452,7 +447,7 @@ async function updateViews(workoutID){
 
 async function updateDownloads(workoutData){
 
-    workoutData.incrementDownloads();
+    workoutData.stats.downloads += 1;
 
     req = {workoutID: workoutData.id, workout: workoutData}
 
@@ -527,7 +522,7 @@ class Websocket{
         const isUser = urlParams.get('user') === 'true';
 
 
-
+        updateViews(workoutID);
         loadWorkout(workoutID, isUser);
         uploadButton();
     }

@@ -23,12 +23,12 @@ function peerProxy(httpServer) {
 
     ws.on('message', function message(data) {
       const msg = JSON.parse(data);
-      if (msg.type === viewEvent) {
-
-      } else if (msg.type === DownloadEvent) {
-        
+      if (msg.type === viewEvent || msg.type === DownloadEvent) {
+          connections.forEach(c => {
+              c.ws.send(data);
+          });
       }
-    });
+  });
 
 
     // Remove the closed connection so we don't try to forward anymore
