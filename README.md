@@ -85,7 +85,7 @@ Image shows a few different potential web pages
 - **User registration** - Creates a new account in the database.
 - **Existing user** - Stores the Workouts under the user logged in, user can log in to access them
 - **Use MongoDB to store credentials** - Stores both user and their workouts. Passwords are encypted.
-- **Restricts functionality** - You cannot go past the home page until you have logged in
+- **Restricts functionality** - You cannot go past the home page until you have logged in. Users are authenticated with an authtoken stored in cookies
 
 ### Websocket
 - **Prerequisite** - Simon CSS deployed to your production environment -> Done
