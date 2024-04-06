@@ -71,8 +71,12 @@ async function addUser(user){
     
 }
 
-function getUserByToken(token) {
-    return userCollection.findOne({ token: token });
+async function getUserByToken(token) {
+    if(token== undefined || token == null){
+        return false
+    }
+    const document = await userCollection.findOne({ token: token });
+    return document ? document : false;
   }
 
 async function updateWorkout(workoutID, workout){
@@ -104,7 +108,10 @@ async function verifyUser(user){
     if (result) {
         const hashedPassword = result.password;
         const match = await bcrypt.compare(providedPassword, hashedPassword);
-        return match;
+        if(match){
+            return result;
+        }
+            return false;
     } else {
         return false;
     }

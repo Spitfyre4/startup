@@ -23,22 +23,12 @@ app.use(`/api`, apiRouter);
 //     res.json(workoutsArray);
 //   });
 
-
-
-
-
 apiRouter.get('/idList', (_req, res) => {
   console.log("\n");
     console.log("in idList endpoint..");
     res.send(idList);
     console.log("\n");
   });
-
-
-
-
-
-
 
 apiRouter.post('/user', async (req, res) => {
   console.log("\n");
@@ -73,12 +63,17 @@ apiRouter.post('/verify', async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
   const user = { username, password };
+  let exists = false;
   console.log(" -verifying " + username);
 
-  const exists = await DB.verifyUser(user);
+  const trueUser = await DB.verifyUser(user);
+  if(trueUser){
+    exists = true;
+  }
+  console.log(trueUser);
   console.log("logging exists");
   console.log(exists);
-  setAuthCookie(res, user.token);
+  setAuthCookie(res, trueUser.token);
   res.send({ exists: exists });
   console.log("\n");
   });
@@ -99,11 +94,16 @@ const secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
 
 secureApiRouter.use(async (req, res, next) => {
+  console.log("\nIn secureApi");
   const authToken = req.cookies[authCookieName];
+  console.log("Retrieved auth -> " + authToken);
   const user = await DB.getUserByToken(authToken);
+  console.log("verifying -> " + user);
   if (user) {
+    console.log("User authorized");
     next();
   } else {
+    console.log("User not authorized");
     res.status(401).send({ msg: 'Unauthorized' });
   }
 });
@@ -120,9 +120,6 @@ secureApiRouter.post('/workouts', async (req, res) => {
     console.log("\n");
   });
 
-app.use((_req, res) => {
-  res.sendFile('index.html', { root: 'public' });
-});
 
 secureApiRouter.get('/catalog', async (_req, res) => {
   console.log("\n");
@@ -164,6 +161,10 @@ secureApiRouter.post('/update', async (req, res) => {
   const added = await DB.updateWorkout(req.body.workoutID, req.body.workout);
   res.send({added: added});
   console.log("\n");
+});
+
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
 });
 
 function setAuthCookie(res, authToken) {
