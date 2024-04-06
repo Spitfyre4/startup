@@ -141,6 +141,9 @@ async function createWorkoutLinks(isUser) {
         }
         else{
             const response = await fetch('/api/catalog');
+            if (!response.ok) {
+                window.location.href = "index.html";
+            }
             workoutsArray = await response.json();
         }
     
@@ -420,54 +423,6 @@ function updateStats(workoutData){
     downloadsSpan.textContent = `Downloads: ${workoutData.stats.downloads}`;
 }
 
-// async function updateViews(workoutID){
-//     console.log("in update views");
-
-//     // const socket = new Websocket();
-//     // socket.configureWebSocket();
-
-//     let catalog = new Map();
-//     let workoutData = new workout;
-
-//     try {
-//         const response = await fetch('/api/catalog');
-//         catalogArray = await response.json();
-//       } catch (error){
-//         console.error('Error downloading workout:', error);
-//       }
-
-//     catalogArray.forEach(workout => {
-//         catalog.set(workout.id, workout);
-//     });
-
-//     workoutData = catalog.get(workoutID);
-
-//     workoutData.stats.views += 1;
-
-//     req = {workoutID: workoutData.id, workout: workoutData}
-
-//     try {
-//         const response = await fetch('/api/update', {
-//             method: 'POST',
-//             headers: {'content-type': 'application/json'},
-//             body: JSON.stringify(req)
-//         });
-
-//         if (response.ok) {
-//         } else {
-//             console.error('Failed to update workout:', response.statusText);
-//         }
-//     } catch (error) {
-//         console.error('Error updating workout:', error);
-//     }
-
-//     const event = {
-//     type: viewEvent,
-//     data: workoutData, 
-//     };
-
-//     socket.broadcastEvent(event);
-// }
 
 async function updateDownloads(workoutData){
 
