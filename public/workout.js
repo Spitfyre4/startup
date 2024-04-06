@@ -98,6 +98,7 @@ async function createWorkout(){
             window.location.href = "user_workouts.html";
         } else {
             console.error('Failed to create workout:', response.statusText);
+            window.location.href = "index.html";
         }
     } catch (error) {
         console.error('Error creating workout:', error);
@@ -130,7 +131,13 @@ async function createWorkoutLinks(isUser) {
                 headers: {'content-type': 'application/json'},
                 body: JSON.stringify({ username: username })
             });
+
+            if (!response.ok) {
+                window.location.href = "index.html";
+            }
+
             workoutsArray = await response.json();
+
         }
         else{
             const response = await fetch('/api/catalog');
@@ -181,10 +188,16 @@ async function loadWorkout(workoutID, isUser){
                 headers: {'content-type': 'application/json'},
                 body: JSON.stringify({ username: username })
             });
+            if (!response.ok) {
+                window.location.href = "index.html";
+            }
             workoutsArray = await response.json();
         }
         else{
             const response = await fetch('/api/catalog');
+            if (!response.ok) {
+                window.location.href = "index.html";
+            }
             workoutsArray = await response.json();
         }
     
@@ -320,6 +333,11 @@ async function uploadWorkout(workoutID){
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(workoutData)
         });
+
+        if (!response.ok) {
+            window.location.href = "index.html";
+        }
+
         } catch (error) {
             console.error('Error uploading:', error);
         }
@@ -336,6 +354,9 @@ async function downloadWorkout(workoutID){
 
     try {
         const response = await fetch('/api/catalog');
+        if (!response.ok) {
+            window.location.href = "index.html";
+        }
         catalogArray = await response.json();
       } catch (error){
         console.error('Error downloading workout:', error);
@@ -370,6 +391,7 @@ async function downloadWorkout(workoutID){
             window.location.href = "user_workouts.html";
         } else {
             console.error('Failed to download workout:', response.statusText);
+            window.location.href = "index.html";
         }
     } catch (error) {
         console.error('Error downloading workout:', error);
@@ -463,6 +485,7 @@ async function updateDownloads(workoutData){
         if (response.ok) {
         } else {
             console.error('Failed to update workout:', response.statusText);
+            window.location.href = "index.html";
         }
     } catch (error) {
         console.error('Error updating workout:', error);
