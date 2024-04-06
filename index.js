@@ -166,6 +166,19 @@ secureApiRouter.post('/update', async (req, res) => {
   console.log("\n");
 });
 
+secureApiRouter.post('/upload', async (req, res) => {
+  console.log("\n");
+  console.log("in upload endpoint..");
+
+  // catalog.set(req.body.id, req.body);
+  // res.send(catalog);
+  console.log("workout in upload: " + JSON.stringify(req.body));
+  const added = await DB.addWorkout("catalog123456789", req.body);
+  console.log("out of add, back in upload");
+  res.send({added: added});
+  console.log("\n");
+});
+
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
