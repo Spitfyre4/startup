@@ -63,7 +63,7 @@ async function addUser(user){
         };
         await userCollection.insertOne(newUser);
         await workoutCollection.insertOne({ username: user.username, workouts: {} });
-        return true;
+        return newUser;
     }
     else {
         return false;

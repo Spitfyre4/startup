@@ -34,14 +34,17 @@ apiRouter.post('/user', async (req, res) => {
   console.log("\n");
     console.log("in user post endpoint..");
     const user = req.body;
-
-    const added = await DB.addUser(user);
+    let added = false;
+    const trueUser = await DB.addUser(user);
+    if(trueUser){
+      added = true;
+    }
     console.log(" - finished DB add, back in endpoint")
     res.status(200);
     console.log("added: ");
     console.log(added);
 
-    setAuthCookie(res, user.token);
+    setAuthCookie(res, trueUser.token);
 
     res.send({added: added});
     console.log("\n");
@@ -167,8 +170,8 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-function setAuthCookie(res, authToken) {
-  res.cookie(authCookieName, authToken, {
+async function setAuthCookie(res, authToken) {
+  await res.cookie(authCookieName, authToken, {
     secure: true,
     httpOnly: true,
     sameSite: 'strict',
