@@ -17,26 +17,22 @@ export default function App() {
   
           <nav>
             <menu>
-              <li className="menu nav-item"><NavLink className="nav-link" activeClassName="active" to="/login">Home</NavLink></li>
+              <li className="menu nav-item"><NavLink className="nav-link" activeClassName="active" to="/">Home</NavLink></li>
               <li className="menu nav-item"><NavLink className="nav-link" activeClassName="active" to="/workouts">Workouts</NavLink></li>
               <li className="menu nav-item"><NavLink className="nav-link" activeClassName="active" to="/catalog">Workout Catalog</NavLink></li>
               <li className="menu nav-item"><NavLink className="nav-link" activeClassName="active" to="/account">Account</NavLink></li>
             </menu>
           </nav>
-  
           <hr />
         </header>
 
-        <main>
-          main body here
-        </main>
-
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/account" element={<Account />} />
           <Route path="/workouts" element={<WorkoutList />} />
           <Route path="/catalog" element={<WorkoutList />} />
           <Route path="/about" element={<About />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
 
         <footer className="bg-secondary text-light">
@@ -46,4 +42,8 @@ export default function App() {
       </div>
     </BrowserRouter>
   );
+}
+
+function NotFound() {
+  return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
 }
