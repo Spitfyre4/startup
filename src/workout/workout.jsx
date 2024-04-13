@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '../workout.css';
+import { useNavigate } from 'react-router-dom';
 
 export function Workout() {
   const { id, isUser } = useParams();
-  console.log("Got id of: " + id);
-  console.log("got isUser of: " + isUser);
   const [workoutData, setWorkoutData] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchWorkout() {
@@ -22,6 +22,31 @@ export function Workout() {
   }, [id, isUser]);
 
   console.log(workoutData);
+
+  async function downloadWorkout(workoutID) {
+    try {
+      const workoutData = await loadWorkout(workoutID, isUser);
+      
+      const myWorkout = workoutData;
+      
+      const req = new workoutReq(getUsername(), myWorkout);
+  
+      const response = await fetch('/api/workout', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(req)
+      });
+  
+      if (response.ok) {
+        navigate("/workouts");
+      } else {
+        console.error('Failed to download workout:', response.statusText);
+        navigate("/");
+      }
+    } catch (error) {
+      console.error('Error downloading workout:', error);
+    }
+  }
 
   return (
     <main className="workout-background">
@@ -83,14 +108,14 @@ async function loadWorkout(workoutID, isUser) {
         body: JSON.stringify({ username: username })
       });
       if (!response.ok) {
-        window.location.href = "index.html";
+        navigate("/");
       }
       workoutsArray = await response.json();
     } else {
       console.log("is catalog");
       const response = await fetch('/api/catalog');
       if (!response.ok) {
-        window.location.href = "index.html";
+        navigate("/");
       }
       workoutsArray = await response.json();
     }
@@ -110,9 +135,26 @@ async function loadWorkout(workoutID, isUser) {
 }
 
 async function uploadWorkout(workoutID) {
+  
 
 }
 
-async function downloadWorkout(workoutID) {
+class workoutReq{
+  constructor(username, workout){
+      this.username = username;
+      this.workout = workout;
+  }
+}
 
+class workout{
+constructor(name, exercises){
+    this.name = name;
+    this.exercises = exercises;
+    this.stats = { views: 0, downloads: 0};
+    this.id = generateUniqueId();
+}
+}
+
+function getUsername() {
+  return localStorage.getItem('username') ?? 'Mystery user';
 }
