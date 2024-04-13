@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 
 export function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const history = useHistory();
+  const navigate = useNavigate();
 
   async function loginUser() {
     const user = { username, password };
@@ -32,11 +33,11 @@ export function Login() {
         localStorage.setItem("password", password);
 
         // window.location.href = "user_workouts.html"; 
-        // history.push("/workouts");
+        navigate("/workouts");
       } else{
         console.log("User verification failed.");
         // window.location.href = "index.html";
-        // history.push("/");
+        navigate("/");
       }
 
     } catch (error) {
@@ -67,10 +68,10 @@ export function Login() {
         localStorage.setItem("password", password);
         console.log("inside");
 
-        window.location.href = "user_workouts.html";
+        navigate("/workouts");
       } else {
         console.log("inside");
-        window.location.href = "index.html";
+        navigate("/");
         console.error('Failed to create user:', response.statusText);
       }
     } catch (error) {
