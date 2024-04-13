@@ -13,6 +13,8 @@ export function Workout() {
       try {
         const data = await loadWorkout(id, isUser);
         setWorkoutData(data);
+        updateStats(data);
+        
       } catch (error) {
         console.error('Error fetching workout:', error);
       }
@@ -58,6 +60,8 @@ export function Workout() {
       });
   
       if (response.ok) {
+        updateDownloads(workoutData);
+        updateStats(workoutData);
         navigate("/workouts");
       } else {
         console.error('Failed to download workout:', response.statusText);
@@ -172,6 +176,37 @@ constructor(name, exercises){
 }
 }
 
+
 function getUsername() {
   return localStorage.getItem('username') ?? 'Mystery user';
 }
+
+function updateStats(workoutData){
+  const downloadsSpan = document.getElementById('downloads');
+  downloadsSpan.textContent = `Downloads: ${workoutData.stats.downloads}`;
+}
+
+async function updateDownloads(workoutData){
+
+  workoutData.stats.downloads += 1;
+
+  const req = {workoutID: workoutData.id, workout: workoutData}
+
+  try {
+      const response = await fetch('/api/update', {
+          method: 'POST',
+          headers: {'content-type': 'application/json'},
+          body: JSON.stringify(req)
+      });
+
+      if (response.ok) {
+      } else {
+          console.error('Failed to update workout:', response.statusText);
+          window.location.href = "index.html";
+      }
+  } catch (error) {
+      console.error('Error updating workout:', error);
+  }
+
+}
+

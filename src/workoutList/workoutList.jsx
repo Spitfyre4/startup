@@ -23,7 +23,7 @@ export function WorkoutList({ isUser }) {
         }
 
         if (!response.ok) {
-          window.location.href = "index.html";
+          navigate("/");
           return;
         }
 
