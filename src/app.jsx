@@ -9,6 +9,15 @@ import { WorkoutList } from './workoutList/workoutList';
 import { About } from './about/about';
 
 export default function App() {
+  function getUsername() {
+    return localStorage.getItem('username') ?? 'Mystery user';
+  }
+
+  function getPassword() {
+    const storedPassword = localStorage.getItem('password');
+    return storedPassword ? '*'.repeat(storedPassword.length) : 'N/A';
+  }
+  
   return (
     <BrowserRouter>
       <div className="body bg-white text-dark">
@@ -29,8 +38,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/workouts" element={<WorkoutList />} />
-          <Route path="/catalog" element={<WorkoutList />} />
+          <Route path="/workouts" element={<WorkoutList isUser={true} />} />
+          <Route path="/catalog" element={<WorkoutList isUser={false} />} />
           <Route path="/about" element={<About />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
