@@ -6,7 +6,9 @@ import { Login } from './login/login';
 import { Account } from './account/account';
 import { Workout } from './workout/workout';
 import { WorkoutList } from './workoutList/workoutList';
+import { NewWorkout } from './newWorkout/newWorkout';
 import { About } from './about/about';
+
 
 export default function App() {
 
@@ -34,6 +36,7 @@ export default function App() {
           <Route path="/catalog" element={<WorkoutList isUser={false} />} />
           <Route path="/about" element={<About />} />
           <Route path="/workout/:id/:isUser" element={<Workout />} />
+          <Route path="/newWorkout" element={<NewWorkout />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
 

@@ -3,7 +3,7 @@ class workout{
         this.name = name;
         this.exercises = exercises;
         this.stats = { views: 0, downloads: 0};
-        this.id = generateUniqueId(); //Change to uuid once we use react
+        this.id = generateUniqueId();
     }
 }
 

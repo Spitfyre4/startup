@@ -40,7 +40,14 @@ export function WorkoutList({ isUser }) {
   return (
     <main className="catalog-background">
       <div className="translucent-box margin-bottom">
-        <h1>{isUser ? 'Workouts' : 'Catalog'}</h1>
+      <h1>
+        {isUser ? 'Workouts' : 'Catalog'} 
+        {isUser && (
+          <button className="new_workout_button" onClick={() => navigate("/newWorkout")}>
+            +
+          </button>
+        )}
+      </h1>
         <div id="workout-links">
         {workouts.map(workout => (
             <React.Fragment key={workout.id}>
