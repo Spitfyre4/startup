@@ -96,3 +96,13 @@ Image shows a few different potential web pages
 - **Frontend makes WebSocket connection** - Done
 - **Data sent over WebSocket connection** - Done
 - **WebSocket data displayed** - The number of downloads is tracked and updated through websockets. You can download workouts from the workout catalog
+
+### React
+- **Prerequisite** - Simon CSS deployed to your production environment -> Done
+- **Prerequisite** - A link to your GitHub startup repository prominently displayed on your application's home page -> Done(scroll to bottom)
+- **Prerequisite** - Notes in your startup Git repository README.md file -> Done
+- **Prerequisite** - At least 10 git commits spread consistently throughout the assignment period -> Done
+- **Bundled using Vite** - Done
+- **Multiple functional react components** - Many components such as account, login, catalog, and workouts
+- **React router** - Router in app.jsx that links to all components
+- **React hooks** - UseEffect is often used to load the data for the page
