@@ -1,5 +1,8 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 export function Workout() {
-  return <main className="workout-background">Workout</main>;
+  const { id } = useParams();
+
+  return <main className="workout-background">Workout {id}</main>;
 }

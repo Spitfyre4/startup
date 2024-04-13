@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './workout.css';
-// import { getUsername } from './account/account.jsx';
+import { useNavigate } from 'react-router-dom';
 
 export function WorkoutList({ isUser }) {
   const [workouts, setWorkouts] = useState([]);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     async function fetchWorkouts() {
@@ -42,13 +44,13 @@ export function WorkoutList({ isUser }) {
         <div id="workout-links">
         {workouts.map(workout => (
             <React.Fragment key={workout.id}>
-              <a
-                href={`workout.html?id=${workout.id}${isUser ? '&user=true' : '&user=false'}`}
-                className="workout_link btn btn-secondary"
-              >
-                {workout.name}
-              </a>
-              <br />
+            <button
+              onClick={() => navigate(`/workout/${workout.id}`)}
+              className="workout_link btn btn-secondary"
+            >
+              {workout.name}
+            </button>
+            <br />
             </React.Fragment>
           ))}
         </div>

@@ -4,20 +4,12 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import './app.css';
 import { Login } from './login/login';
 import { Account } from './account/account';
-// import { Workout } from './workout/workout';
+import { Workout } from './workout/workout';
 import { WorkoutList } from './workoutList/workoutList';
 import { About } from './about/about';
 
 export default function App() {
-  function getUsername() {
-    return localStorage.getItem('username') ?? 'Mystery user';
-  }
 
-  function getPassword() {
-    const storedPassword = localStorage.getItem('password');
-    return storedPassword ? '*'.repeat(storedPassword.length) : 'N/A';
-  }
-  
   return (
     <BrowserRouter>
       <div className="body bg-white text-dark">
@@ -41,6 +33,7 @@ export default function App() {
           <Route path="/workouts" element={<WorkoutList isUser={true} />} />
           <Route path="/catalog" element={<WorkoutList isUser={false} />} />
           <Route path="/about" element={<About />} />
+          <Route path="/workout/:id" element={<Workout />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
 
