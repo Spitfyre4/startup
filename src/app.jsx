@@ -1,55 +1,49 @@
-// import React from 'react';
-// import { Login } from './login/login';
-// import { Account } from './account/account';
-// import { Workout } from './workout/workout';
-// import { WorkoutList } from './workoutList/workoutList';
-// import { About } from './about/about';
-
-// export function App() {
-//   return (
-//     <div>
-//       <h1>Smart Workouts</h1>
-//       <Login />
-//       <Account />
-//       <Workout />
-//       <WorkoutList />
-//       <About />
-//     </div>
-//   );
-// }
-
-
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import './app.css';
+import { Login } from './login/login';
+import { Account } from './account/account';
+// import { Workout } from './workout/workout';
+import { WorkoutList } from './workoutList/workoutList';
+import { About } from './about/about';
 
 export default function App() {
   return (
-    <div className="body bg-white text-dark">
-      <header className="header bg-secondary text-light sticky-top">
-        <h1>Smart Workouts</h1>
+    <BrowserRouter>
+      <div className="body bg-white text-dark">
+        <header className="header bg-secondary text-light sticky-top">
+          <h1>Smart Workouts</h1>
   
-        <nav>
-          <menu>
-            <li className="menu nav-item"><a className="nav-link active" href="index.html">Home</a></li>
-            <li className="menu nav-item"><a className="nav-link" href="user_workouts.html">Workouts</a></li>
-            <li className="menu nav-item"><a className="nav-link" href="workout_catalog.html">Workout Catalog</a></li>
-            <li className="menu nav-item"><a className="nav-link" href="account.html">Account</a></li>
-          </menu>
-        </nav>
+          <nav>
+            <menu>
+              <li className="menu nav-item"><NavLink className="nav-link" activeClassName="active" to="/login">Home</NavLink></li>
+              <li className="menu nav-item"><NavLink className="nav-link" activeClassName="active" to="/workouts">Workouts</NavLink></li>
+              <li className="menu nav-item"><NavLink className="nav-link" activeClassName="active" to="/catalog">Workout Catalog</NavLink></li>
+              <li className="menu nav-item"><NavLink className="nav-link" activeClassName="active" to="/account">Account</NavLink></li>
+            </menu>
+          </nav>
   
-        <hr />
-      </header>
+          <hr />
+        </header>
 
+        <main>
+          main body here
+        </main>
 
-      <main>
-        Main things
-      </main>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/workouts" element={<WorkoutList />} />
+          <Route path="/catalog" element={<WorkoutList />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
 
-      <footer className="footer bg-secondary text-light">
-        <a href="about.html" style={{ display: "inline-block" }}>About</a>
-        <a href="https://github.com/Spitfyre4/startup" style={{ float: "right" }}>GitHub</a>
-      </footer>
-    </div>
+        <footer className="bg-secondary text-light">
+          <NavLink to="/about" className="nav-link" activeClassName="active" style={{ display: "inline-block" }}>About</NavLink>
+          <a href="https://github.com/Spitfyre4/startup" style={{ float: "right" }}>GitHub</a>
+        </footer>
+      </div>
+    </BrowserRouter>
   );
-    }
+}
