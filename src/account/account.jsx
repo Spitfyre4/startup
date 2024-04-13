@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './account.css';
+import { useNavigate } from 'react-router-dom';
 
 export function Account() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     initializeUser();
@@ -52,12 +54,53 @@ export function Account() {
     </main>
   );
 
+  async function changeUsername() {
+    const oldUsername = localStorage.getItem("username");
+    const newUsername = document.querySelector("#username").value;
 
+    try {
+      const response = await fetch('/api/change-username', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify({ oldUsername, newUsername })
+      });
 
-function changeUsername() {
-}
+      const responseData = await response.json();
 
-function changePassword() {
-}
+      if (responseData.changed) {
+        localStorage.setItem("username", newUsername);
+        navigate("/workouts");
+      } else {
+        console.error('Failed to change username.');
+      }
+    } catch (error) {
+      console.error('Error changing username:', error);
+    }
+    
+  }
+
+  async function changePassword() {
+    const username = localStorage.getItem("username");
+    const password = document.querySelector("#password").value;
+
+    try {
+      const response = await fetch('/api/change-password', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify({ username, password })
+      });
+
+      const responseData = await response.json();
+
+      if (responseData.changed) {
+        localStorage.setItem("password", password);
+        navigate("/workouts");
+      } else {
+        console.error('Failed to change password.');
+      }
+    } catch (error) {
+      console.error('Error changing password:', error);
+    }
+  }
 
 }
