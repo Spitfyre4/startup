@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './workout.css';
+import '../workout.css';
 import { useNavigate } from 'react-router-dom';
 
 export function WorkoutList({ isUser }) {
@@ -45,7 +45,7 @@ export function WorkoutList({ isUser }) {
         {workouts.map(workout => (
             <React.Fragment key={workout.id}>
             <button
-              onClick={() => navigate(`/workout/${workout.id}`)}
+              onClick={() => navigate(`/workout/${workout.id}/${isUser}`)}
               className="workout_link btn btn-secondary"
             >
               {workout.name}

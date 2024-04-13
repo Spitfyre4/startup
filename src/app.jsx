@@ -33,7 +33,7 @@ export default function App() {
           <Route path="/workouts" element={<WorkoutList isUser={true} />} />
           <Route path="/catalog" element={<WorkoutList isUser={false} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/workout/:id" element={<Workout />} />
+          <Route path="/workout/:id/:isUser" element={<Workout />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
 
