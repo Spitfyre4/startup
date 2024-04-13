@@ -34,22 +34,22 @@
     top: 35.5%
   }
 
-  /* .translucent-box:nth-child(2){ prob for stats box
-    right: 1%;
+  .statsBox{ 
+    right: 0.1%;
     top: 14%;
     overflow-y: auto;
     max-height: 45vh;
 }
 
 @media (max-width: 395px) {
-    .translucent-box:nth-child(2){
+    .statsBox{
         left: 5%;
         top: 85%;
         overflow-y: auto;
         max-height: 45vh;
         max-width: 175px;
     }
-  } */
+  }
 
   .new_workout_button{
     color: blue;

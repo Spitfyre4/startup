@@ -4,6 +4,8 @@ import '../workout.css';
 
 export function Workout() {
   const { id, isUser } = useParams();
+  console.log("Got id of: " + id);
+  console.log("got isUser of: " + isUser);
   const [workoutData, setWorkoutData] = useState(null);
 
   useEffect(() => {
@@ -52,6 +54,18 @@ export function Workout() {
           <p>Loading...</p>
         )}
       </div>
+
+      <div className="translucent-box statsBox">
+        <h2>Stats</h2>
+        <span id="downloads">Downloads: 0</span>
+        <br></br>
+        {isUser === 'true' ? (
+          <button type="button" className="btn btn-primary" onClick={() => uploadWorkout(id)}>Upload</button>
+        ) : (
+          <button type="button" className="btn btn-primary" onClick={() => downloadWorkout(id)}>Download</button>
+        )}
+        
+      </div>
     </main>
   );
 }
@@ -61,7 +75,8 @@ async function loadWorkout(workoutID, isUser) {
     let workoutsArray = [];
     const username = getUsername();
 
-    if (isUser) {
+    if (isUser === 'true') {
+      console.log("is user");
       const response = await fetch('/api/workouts', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
@@ -72,6 +87,7 @@ async function loadWorkout(workoutID, isUser) {
       }
       workoutsArray = await response.json();
     } else {
+      console.log("is catalog");
       const response = await fetch('/api/catalog');
       if (!response.ok) {
         window.location.href = "index.html";
@@ -81,6 +97,7 @@ async function loadWorkout(workoutID, isUser) {
 
     const workouts = new Map(workoutsArray.map(workout => [workout.id, workout]));
     const workoutData = workouts.get(workoutID);
+    console.log("workoutData: " + workoutData);
     return workoutData;
   } catch (error) {
     console.error('Error loading workout:', error);
@@ -90,4 +107,12 @@ async function loadWorkout(workoutID, isUser) {
   function getUsername() {
     return localStorage.getItem('username') ?? 'Mystery user';
   }
+}
+
+async function uploadWorkout(workoutID) {
+
+}
+
+async function downloadWorkout(workoutID) {
+
 }
