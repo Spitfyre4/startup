@@ -23,6 +23,26 @@ export function Workout() {
 
   console.log(workoutData);
 
+  async function uploadWorkout(workoutID) {
+    const workoutData = await loadWorkout(workoutID, isUser);
+        
+    try {
+      const response = await fetch('/api/upload', {
+          method: 'POST',
+          headers: {'content-type': 'application/json'},
+          body: JSON.stringify(workoutData)
+      });
+
+      if (!response.ok) {
+          navigate("/");
+      }
+
+      } catch (error) {
+          console.error('Error uploading:', error);
+      }
+
+  }
+
   async function downloadWorkout(workoutID) {
     try {
       const workoutData = await loadWorkout(workoutID, isUser);
@@ -134,10 +154,7 @@ async function loadWorkout(workoutID, isUser) {
   }
 }
 
-async function uploadWorkout(workoutID) {
-  
 
-}
 
 class workoutReq{
   constructor(username, workout){
