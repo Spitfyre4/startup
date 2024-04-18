@@ -1,7 +1,19 @@
 # Notes
 # *Final*
 ## Express middleware
+- Delete method, path fav/ringo
+  * Look for http method of delete
+- Injecting this handler that matches a pattern, then it will run that code when finding pattern
+- Goes in order from top down
+- Next() calls it to call the following middleware
+- App.use is always used
+- Express doesn’t know when you finish if you don’t say it
+  * Need to use res.send
 ## Fetch
+- Can use in front end and back end code
+- Fetch is actually an api, so you can make a network request
+- Backend is in case you need to send a network request to somewhere else and then filter the request when it comes in
+  * Like a weather report or something
 ## React router
 ## HTTP Headers
 ### Cookie
@@ -13,7 +25,6 @@ Data represented with a cookie
 - Who am I talking to, the domain
 - The domain that is hosting the request
   * The one that made the request from
-
 ## JSX
 - Componentize your html
 - Decomposing your application into different components
@@ -22,8 +33,13 @@ Data represented with a cookie
   * Composing different components
 ### Not a purpose of JSX
 To combine CSS, HTML, and javascript
-
 ## Linux Daemon	
+- Something that runs on you computer without a user
+- PM2 is an example
+- Running your services
+- Log out of computer in VA and it is still running
+- Makes certain things run in the background all the time
+- Primary use is to fork other processes
 ## Websocket
 ### What value does WebSocket add to HTTP
 Uses peer to peer instead of client to server
@@ -48,6 +64,13 @@ Allow the server to store data on the client
 - 500
   * Server error
 ### Ports
+- Port 80
+ * Reserved for HTTP
+ * Unsecure version of transfer protocol
+- Port 443
+  * Reserved for HTTPS
+- Port 22
+  * Reserved for SSH
 # *Midterm*
 ## Github
  - when you try to pull and there is a merge conflict, look in vs code to see the differences
