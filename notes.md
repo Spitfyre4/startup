@@ -1,6 +1,20 @@
 # Notes
 # *Final*
+## Express middleware
+## Fetch
+## React router
+## HTTP Headers
+## JSX
+## Linux Daemon	
+## Websocket
+## Cookies
+## React
+## MongoDB
+### Query
 ## Kahoot tips
+### What does npm install do?
+### HTTP Status Codes
+### Ports
 # *Midterm*
 ## Github
  - when you try to pull and there is a merge conflict, look in vs code to see the differences
