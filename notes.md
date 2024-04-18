@@ -4,16 +4,49 @@
 ## Fetch
 ## React router
 ## HTTP Headers
+### Cookie
+Data represented with a cookie
+### Content-type
+- Sending a certain content type in a request
+- Audio file, video file, html page, etc
+### Host
+- Who am I talking to, the domain
+- The domain that is hosting the request
+  * The one that made the request from
+
 ## JSX
+- Componentize your html
+- Decomposing your application into different components
+- To render html from javascript
+- To allow for composability of your html
+  * Composing different components
+### Not a purpose of JSX
+To combine CSS, HTML, and javascript
+
 ## Linux Daemon	
 ## Websocket
+### What value does WebSocket add to HTTP
+Uses peer to peer instead of client to server
 ## Cookies
+Allow the server to store data on the client
 ## React
 ## MongoDB
 ### Query
 ## Kahoot tips
 ### What does npm install do?
+- Locks the version of the package for your application
+  * If produce makes future version, won’t update it automatically
+- Adds the source code to your node_modules directory
+- Adds a dependency to your package.json?
 ### HTTP Status Codes
+- 200
+  * Success
+- 300
+  * Redirects or caching
+- 400
+  * Client error, front end made a bad request
+- 500
+  * Server error
 ### Ports
 # *Midterm*
 ## Github
