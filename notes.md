@@ -1,5 +1,6 @@
 # Notes
-
+# *Final*
+## Kahoot tips
 # *Midterm*
 ## Github
  - when you try to pull and there is a merge conflict, look in vs code to see the differences
