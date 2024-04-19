@@ -3,7 +3,7 @@
 ## Express
 HTTP endpoints are implemented in Express by defining routes that call a function based upon an HTTP path. The Express app object supports all of the HTTP verbs as functions on the object.
 if you want to have a route function that handles an HTTP GET request for the URL path /store/provo you would call the get method on the app.
-```
+```javascript
 app.get('/store/provo', (req, res, next) => {
   res.send({name: 'provo'});
 });
@@ -12,14 +12,14 @@ app.get('/store/provo', (req, res, next) => {
 A middleware function looks very similar to a routing function. That is because routing functions are also middleware functions. The only difference is that routing functions are only called if the associated pattern matches. Middleware functions are always called for every HTTP request unless a preceding middleware function does not call next
 
 As an example of writing your own middleware, you can create a function that logs out the URL of the request and then passes on processing to the next middleware function.
-```
+```javascript
 app.use((req, res, next) => {
   console.log(req.originalUrl);
   next();
 });
 ```
 Built in Middleware may look like
-```
+```javascript
 app.use(express.static('public'));
 ```
 ### Random Notes
@@ -33,7 +33,7 @@ app.use(express.static('public'));
 The basic usage of fetch takes a URL and returns a promise. The promise then function takes a callback function that is asynchronously called when the requested URL content is obtained. If the returned content is of type application/json you can use the json function on the response object to convert it to a JavaScript object.
 
 The following example makes a fetch request to get and display an inspirational quote. If the request method is unspecified, it defaults to GET.
-```
+```javascript
 fetch('https://api.quotable.io/random')
   .then((response) => response.json())
   .then((jsonResponse) => {
@@ -41,7 +41,7 @@ fetch('https://api.quotable.io/random')
   });
 ```
 Response
-```
+```javascript
 {
   content: 'Never put off till tomorrow what you can do today.',
   author: 'Thomas Jefferson',
