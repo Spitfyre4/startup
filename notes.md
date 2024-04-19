@@ -48,7 +48,7 @@ Response
 };
 ```
 To do a POST request you populate the options parameter with the HTTP method and headers.
-```
+```javascript
 fetch('https://jsonplaceholder.typicode.com/posts', {
   method: 'POST',
   body: JSON.stringify({
