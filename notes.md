@@ -164,7 +164,7 @@ Data represented with a cookie
 - Who am I talking to, the domain
 - The domain that is hosting the request
   * The one that made the request from
-  * 
+
 ## JSX
 - Componentize your html
 - Decomposing your application into different components
