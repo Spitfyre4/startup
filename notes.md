@@ -29,6 +29,7 @@ app.use(express.static('public'));
 - App.use is always called
 - Express doesn’t know when you finish if you don’t say it
   * Need to use res.send
+  * 
 ## Fetch
 The basic usage of fetch takes a URL and returns a promise. The promise then function takes a callback function that is asynchronously called when the requested URL content is obtained. If the returned content is of type application/json you can use the json function on the response object to convert it to a JavaScript object.
 
@@ -70,7 +71,41 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
 - Fetch is actually an api, so you can make a network request
 - Backend is in case you need to send a network request to somewhere else and then filter the request when it comes in
   * Like a weather report or something
-## React router
+ 
+## React
+React abstracts HTML into a JavaScript variant called JSX. JSX is converted into valid HTML and JavaScript using a preprocessor called Babel.
+### React Router
+A web framework router provides essential functionality for single-page applications. With a multiple-webpage application the headers, footers, navigation, and common components must be either duplicated in each HTML page, or injected before the server sends the page to the browser. With a single page application, the browser only loads one HTML page and then JavaScript is used to manipulate the DOM and give it the appearance of multiple pages. The router defines the routes a user can take through the application, and automatically manipulates the DOM to display the appropriate framework components.
+
+A basic implementation of the router consists of a BrowserRouter component that encapsulates the entire application and controls the routing action. The Link, or NavLink, component captures user navigation events and modifies what is rendered by the Routes component by matching up the to and path attributes.
+```javascript
+// Inject the router into the application root DOM element
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  // BrowserRouter component that controls what is rendered
+  // NavLink component captures user navigation requests
+  // Routes component defines what component is routed to
+  <BrowserRouter>
+    <div className='app'>
+      <nav>
+        <NavLink to='/'>Home</Link>
+        <NavLink to='/about'>About</Link>
+        <NavLink to='/users'>Users</Link>
+      </nav>
+
+      <main>
+        <Routes>
+          <Route path='/' element={<Home />} exact />
+          <Route path='/about' element={<About />} />
+          <Route path='/users' element={<Users />} />
+          <Route path='*' element={<Navigate to='/' replace />} />
+        </Routes>
+      </main>
+    </div>
+  </BrowserRouter>
+);
+```
+
 ## HTTP Headers
 ### Cookie
 Data represented with a cookie
@@ -81,6 +116,7 @@ Data represented with a cookie
 - Who am I talking to, the domain
 - The domain that is hosting the request
   * The one that made the request from
+  * 
 ## JSX
 - Componentize your html
 - Decomposing your application into different components
@@ -89,6 +125,7 @@ Data represented with a cookie
   * Composing different components
 ### Not a purpose of JSX
 To combine CSS, HTML, and javascript
+
 ## Linux Daemon	
 - Something that runs on you computer without a user
 - PM2 is an example
@@ -96,6 +133,7 @@ To combine CSS, HTML, and javascript
 - Log out of computer in VA and it is still running
 - Makes certain things run in the background all the time
 - Primary use is to fork other processes
+- 
 ## Websocket
 JavaScript running on a browser can initiate a WebSocket connection with the browser's WebSocket API. First you create a WebSocket object by specifying the port you want to communicate on.
 
@@ -130,11 +168,14 @@ wss.on('connection', (ws) => {
 ```
 ### What value does WebSocket add to HTTP
 Uses peer to peer instead of client to server
+
 ## Cookies
 Allow the server to store data on the client
 ## React
+
 ## MongoDB
 ### Query
+
 ## Kahoot tips
 ### What does npm install do?
 - Locks the version of the package for your application
