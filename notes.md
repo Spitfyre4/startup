@@ -283,8 +283,8 @@ main().catch(console.error);
   * Server error
 ### Ports
 - Port 80
- * Reserved for HTTP
- * Unsecure version of transfer protocol
+  * Reserved for HTTP
+  * Unsecure version of transfer protocol
 - Port 443
   * Reserved for HTTPS
 - Port 22
