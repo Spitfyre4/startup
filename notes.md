@@ -1,6 +1,6 @@
 # Notes
 # *Final*
-## Express middleware
+## Express
 HTTP endpoints are implemented in Express by defining routes that call a function based upon an HTTP path. The Express app object supports all of the HTTP verbs as functions on the object.
 if you want to have a route function that handles an HTTP GET request for the URL path /store/provo you would call the get method on the app.
 ```
@@ -8,11 +8,25 @@ app.get('/store/provo', (req, res, next) => {
   res.send({name: 'provo'});
 });
 ```
+### Express Middleware
+A middleware function looks very similar to a routing function. That is because routing functions are also middleware functions. The only difference is that routing functions are only called if the associated pattern matches. Middleware functions are always called for every HTTP request unless a preceding middleware function does not call next
+
+As an example of writing your own middleware, you can create a function that logs out the URL of the request and then passes on processing to the next middleware function.
+```
+app.use((req, res, next) => {
+  console.log(req.originalUrl);
+  next();
+});
+```
+Built in Middleware may look like
+```
+app.use(express.static('public'));
+```
 ### Random Notes
 - Injecting this handler that matches a pattern, then it will run that code when finding pattern
 - Goes in order from top down
 - Next() calls it to call the following middleware
-- App.use is always used
+- App.use is always called
 - Express doesn’t know when you finish if you don’t say it
   * Need to use res.send
 ## Fetch
