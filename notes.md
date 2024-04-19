@@ -219,10 +219,52 @@ Uses peer to peer instead of client to server
 
 ## Cookies
 Allow the server to store data on the client
-## React
 
 ## MongoDB
-### Query
+Example:
+```javascript
+const { MongoClient } = require('mongodb');
+const config = require('./dbConfig.json');
+
+async function main() {
+  // Connect to the database cluster
+  const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
+  const client = new MongoClient(url);
+  const db = client.db('rental');
+  const collection = db.collection('house');
+
+  // Test that you can connect to the database
+  (async function testConnection() {
+    await client.connect();
+    await db.command({ ping: 1 });
+  })().catch((ex) => {
+    console.log(`Unable to connect to database with ${url} because ${ex.message}`);
+    process.exit(1);
+  });
+
+  // Insert a document
+  const house = {
+    name: 'Beachfront views',
+    summary: 'From your bedroom to the beach, no shoes required',
+    property_type: 'Condo',
+    beds: 1,
+  };
+  await collection.insertOne(house);
+
+  // Query the documents
+  const query = { property_type: 'Condo', beds: { $lt: 2 } };
+  const options = {
+    sort: { score: -1 },
+    limit: 10,
+  };
+
+  const cursor = collection.find(query, options);
+  const rentals = await cursor.toArray();
+  rentals.forEach((i) => console.log(i));
+}
+
+main().catch(console.error);
+```
 
 ## Kahoot tips
 ### What does npm install do?
@@ -247,6 +289,14 @@ Allow the server to store data on the client
   * Reserved for HTTPS
 - Port 22
   * Reserved for SSH
+### MongoDB Query
+- Default operation is and
+- Kahoot Example
+```javascript
+{ $or: [{name:/J.*/), (score: ($lt:3}}]}
+```
+  * Changes to or operation
+  * Looks for name that starts wiht capital J OR Score less than 3
 # *Midterm*
 ## Github
  - when you try to pull and there is a merge conflict, look in vs code to see the differences
