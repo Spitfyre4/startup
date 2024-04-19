@@ -29,7 +29,7 @@ app.use(express.static('public'));
 - App.use is always called
 - Express doesn’t know when you finish if you don’t say it
   * Need to use res.send
-  * 
+    
 ## Fetch
 The basic usage of fetch takes a URL and returns a promise. The promise then function takes a callback function that is asynchronously called when the requested URL content is obtained. If the returned content is of type application/json you can use the json function on the response object to convert it to a JavaScript object.
 
@@ -181,7 +181,7 @@ To combine CSS, HTML, and javascript
 - Log out of computer in VA and it is still running
 - Makes certain things run in the background all the time
 - Primary use is to fork other processes
-- 
+  
 ## Websocket
 JavaScript running on a browser can initiate a WebSocket connection with the browser's WebSocket API. First you create a WebSocket object by specifying the port you want to communicate on.
 
