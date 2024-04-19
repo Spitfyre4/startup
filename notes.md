@@ -1,6 +1,13 @@
 # Notes
 # *Final*
 ## Express middleware
+HTTP endpoints are implemented in Express by defining routes that call a function based upon an HTTP path. The Express app object supports all of the HTTP verbs as functions on the object.
+if you want to have a route function that handles an HTTP GET request for the URL path /store/provo you would call the get method on the app.
+```
+app.get('/store/provo', (req, res, next) => {
+  res.send({name: 'provo'});
+});
+```
 - Delete method, path fav/ringo
   * Look for http method of delete
 - Injecting this handler that matches a pattern, then it will run that code when finding pattern
