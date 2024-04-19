@@ -8,8 +8,7 @@ app.get('/store/provo', (req, res, next) => {
   res.send({name: 'provo'});
 });
 ```
-- Delete method, path fav/ringo
-  * Look for http method of delete
+### Random Notes
 - Injecting this handler that matches a pattern, then it will run that code when finding pattern
 - Goes in order from top down
 - Next() calls it to call the following middleware
