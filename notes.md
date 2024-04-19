@@ -30,6 +30,42 @@ app.use(express.static('public'));
 - Express doesn’t know when you finish if you don’t say it
   * Need to use res.send
 ## Fetch
+The basic usage of fetch takes a URL and returns a promise. The promise then function takes a callback function that is asynchronously called when the requested URL content is obtained. If the returned content is of type application/json you can use the json function on the response object to convert it to a JavaScript object.
+
+The following example makes a fetch request to get and display an inspirational quote. If the request method is unspecified, it defaults to GET.
+```
+fetch('https://api.quotable.io/random')
+  .then((response) => response.json())
+  .then((jsonResponse) => {
+    console.log(jsonResponse);
+  });
+```
+Response
+```
+{
+  content: 'Never put off till tomorrow what you can do today.',
+  author: 'Thomas Jefferson',
+};
+```
+To do a POST request you populate the options parameter with the HTTP method and headers.
+```
+fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  body: JSON.stringify({
+    title: 'test title',
+    body: 'test body',
+    userId: 1,
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then((jsonResponse) => {
+    console.log(jsonResponse);
+  });
+```
+### Random Notes
 - Can use in front end and back end code
 - Fetch is actually an api, so you can make a network request
 - Backend is in case you need to send a network request to somewhere else and then filter the request when it comes in
