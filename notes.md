@@ -271,7 +271,7 @@ main().catch(console.error);
 - Locks the version of the package for your application
   * If produce makes future version, won’t update it automatically
 - Adds the source code to your node_modules directory
-- Adds a dependency to your package.json?
+- Adds a dependency to your package.json
 ### HTTP Status Codes
 - 200
   * Success
